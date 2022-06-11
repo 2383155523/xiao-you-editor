@@ -18,7 +18,7 @@
         p-id="8068"
       ></path>
     </svg>
-    <slot></slot>
+    <slot id="solt"></slot>
   </div>
 </template>
 

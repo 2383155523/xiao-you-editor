@@ -1,71 +1,56 @@
 <script setup lang="ts">
-import { defineProps, toRefs, onMounted, shallowRef, onUpdated } from "vue"
+import { defineProps, toRefs, onMounted, ref, onUpdated } from "vue"
 import ".././prism/prism.js"
 interface props {
   lang?: string
-  top?: string
-  bottom?: string
+  code?: string
 }
 
 const props: props = defineProps({
   lang: String,
-  top: String,
-  bottom: String,
+  code: String,
 })
 
-const { lang, top, bottom } = toRefs(props)
-const pre = shallowRef<HTMLPreElement>()
-let host: HTMLElement
-let el: HTMLElement
+const pre = ref<null | HTMLElement>(null)
+const { lang, code } = toRefs(props)
 let content: string
-
 const render = () => {
+  console.log(code.value)
   try {
-    content =
-      lang.value == "html" ||
-      lang.value == "vue" ||
-      lang.value == "jsx" ||
-      lang.value == "tsx"
-        ? host.innerHTML.trim()
-        : host.textContent.trim()
-    console.dir(host)
-    console.log("content:", content)
-
-    if (lang.value == "jsx" || lang.value == "tsx") {
-      content = content.replaceAll(`" ==""`, "=")
-      content = content.replaceAll(`&lt;`, "<")
-      content = content.replaceAll(`&gt;`, ">")
-      content = content.replaceAll(`"{`, "{")
-    }
-
-    const html =
-      lang.value == "html" || lang.value == "vue"
-        ? Prism.highlight(content, Prism.languages.html, "html")
-        : Prism.highlight(content, Prism.languages[lang.value], lang.value)
+    const el = pre.value
+    const html = Prism.highlight(
+      code.value,
+      Prism.languages[lang.value == "vue" ? "html" : lang.value],
+      lang.value == "vue" ? "html" : lang.value,
+    )
+    console.log("html=", html)
     el.children[0].innerHTML = html
   } catch (error) {}
 }
+
 onMounted(() => {
-  el = pre.value
-  host = el.parentNode.parentNode.parentNode.host
-  host.addEventListener("DOMCharacterDataModified", render, false)
+  console.log("mounted")
   render()
 })
 onUpdated(() => {
+  console.log("updated")
   render()
 })
+// onMounted(render) //初始化
+// onUpdated(render) //更新
 
 const copyCode = (e: MouseEvent) => {
   const oInput = document.createElement("textarea")
-  oInput.value = content
+  oInput.value = code.value
   document.body.appendChild(oInput)
   oInput.select()
   document.execCommand("copy")
   document.body.removeChild(oInput)
   // window.$msg.success("复制成功🎉")
+  alert("复制成功🎉")
 }
-const myCode = shallowRef<HTMLElement>()
-const header = shallowRef<HTMLElement>()
+const myCode = ref<null | HTMLElement>(null)
+const header = ref<null | HTMLElement>(null)
 let isFullScreen = false
 const fullScreen = () => {
   myCode.value.classList.toggle("my-code-fullScreen")
@@ -79,14 +64,7 @@ const fullScreen = () => {
 </script>
 
 <template>
-  <div
-    class="my-code"
-    ref="myCode"
-    :style="{
-      marginTop: top,
-      marginBottom: bottom,
-    }"
-  >
+  <div class="my-code" ref="myCode">
     <div class="header" ref="header">
       <div class="icons">
         <div class="circle one"></div>
@@ -136,7 +114,6 @@ const fullScreen = () => {
     <div class="code">
       <pre ref="pre">
     <code :class="'language-' + lang" >
-        <slot></slot>
     </code>
 </pre>
     </div>
@@ -155,7 +132,7 @@ const fullScreen = () => {
   left: 0;
   z-index: 999;
   margin: 0 !important;
-  // opacity: 1;
+  opacity: 1;
 }
 .header-fullScreen,
 .pre-fullScreen {

@@ -321,12 +321,13 @@ onMounted(() => {
   background-repeat: v-bind("style.headerBoxStyle.background.repeat");
 }
 .editContainer .header .item {
-  width: 50px;
+  /* width: 40px; */
   height: 50px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 20px;
 }
 .editContainer .header .item .icon {
   width: 25px;
@@ -397,17 +398,17 @@ onMounted(() => {
   padding: 10px;
   word-break: break-all;
   border-left: none;
-  font-family: v-bind("style.priviewBoxStyle.font.family");
-  font-size: v-bind("style.priviewBoxStyle.font.size");
-  font-weight: v-bind("style.priviewBoxStyle.font.weight");
-  color: v-bind("style.priviewBoxStyle.font.color");
+  font-family: v-bind("style.previewBoxStyle.font.family");
+  font-size: v-bind("style.previewBoxStyle.font.size");
+  font-weight: v-bind("style.previewBoxStyle.font.weight");
+  color: v-bind("style.previewBoxStyle.font.color");
 
   background: v-bind(
-    "style.priviewBoxStyle.background.url ? style.priviewBoxStyle.background.url :'transparent'"
+    "style.previewBoxStyle.background.url ? style.previewBoxStyle.background.url :'transparent'"
   );
-  background-color: v-bind("style.priviewBoxStyle.background.color");
-  background-size: v-bind("style.priviewBoxStyle.background.size");
-  background-repeat: v-bind("style.priviewBoxStyle.background.repeat");
+  background-color: v-bind("style.previewBoxStyle.background.color");
+  background-size: v-bind("style.previewBoxStyle.background.size");
+  background-repeat: v-bind("style.previewBoxStyle.background.repeat");
 }
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-track-piece {

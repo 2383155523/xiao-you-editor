@@ -1,9 +1,10 @@
 <template>
-  <edit />
+  <router-view> </router-view>
 </template>
 
 <script setup lang="ts">
-import edit from "./components/edit.vue"
+import { useRoute } from "vue-router"
+const route = useRoute()
 </script>
 
 <style lang="scss">
@@ -101,7 +102,8 @@ import edit from "./components/edit.vue"
 }
 //
 :root {
-  --themeColor: rgb(122, 229, 72);
+  --themeColor: purple;
+  --TextColor: #fff;
   // --------------------prism var----------------------------
   --prism-scheme: dark;
   --prism-foreground: #d4cfbf;
@@ -109,8 +111,8 @@ import edit from "./components/edit.vue"
   --prism-comment: #758575;
   --prism-string: #7ec699;
   --prism-literal: #429988;
-  // --prism-keyword: #4d9375;
-  --prism-keyword: #cb7676;
+  --prism-keyword: #4d9375;
+  // --prism-keyword: #cb7676;
   --prism-function: #f08d49;
   --prism-deleted: #a14f55;
   --prism-class: #54b1bf;

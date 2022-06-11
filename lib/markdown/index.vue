@@ -1,6 +1,6 @@
 <template>
   <div class="editContainer">
-    <div class="header">
+    <div class="header" v-if="utils.length">
       <div
         class="item"
         v-for="(item, index) in utils"
@@ -12,7 +12,12 @@
     </div>
     <splitPane>
       <template #left>
-        <div class="editBox">
+        <div
+          class="editBox"
+          :style="{
+            height: utils.length ? 'calc(100% - 50px)' : '100%',
+          }"
+        >
           <textarea
             name="write"
             class="edit"
@@ -30,7 +35,12 @@
       </template>
 
       <template #right>
-        <div class="previewBox">
+        <div
+          class="previewBox"
+          :style="{
+            height: utils.length ? 'calc(100% - 50px)' : '100%',
+          }"
+        >
           <div
             class="preview"
             ref="preview"
@@ -68,11 +78,10 @@ import {
 import { marked } from "marked"
 import splitPane from "../splitPane/index.vue"
 import type { PropType } from "vue"
-import type { styles, utilItem, hooks } from "../index.d"
+import type { styles, utilItem, hooks, renderer as Renderer } from "../index.d"
 /***
  * @Global
  */
-
 const patch = init([
   // 通过传入模块初始化 patch 函数
   classModule, // 开启 classes 功能
@@ -83,14 +92,7 @@ const patch = init([
 ])
 let oldVnode: any
 let isLeft: boolean = false
-const renderer = new marked.Renderer()
-console.log("renderer", renderer)
-renderer.code = (code, lang, escaped) => {
-  return `<my-code lang="${lang}" code='${code}'></my-code>`
-}
-marked.setOptions({
-  renderer,
-})
+const rendererInstance = new marked.Renderer()
 
 /**
  * @Attrs
@@ -128,8 +130,16 @@ const props = defineProps({
     type: Array as PropType<Array<utilItem>>,
     default: [],
   },
+  renderer: {
+    type: Object as PropType<Renderer>,
+  },
 })
-const { modelValue, utils, placeholder } = toRefs(props)
+const { modelValue, utils, placeholder, renderer } = toRefs(props)
+
+//marked Options 初始化
+marked.setOptions({
+  renderer: Object.assign(rendererInstance, renderer.value),
+})
 
 /**
  *@Data
@@ -333,12 +343,13 @@ onMounted(() => {
   background-repeat: v-bind("style.headerBoxStyle.background.repeat");
 }
 .editContainer .header .item {
-  width: 50px;
+  /* width: 50px; */
   height: 50px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 20px;
 }
 .editContainer .header .item .icon {
   width: 25px;
@@ -409,17 +420,17 @@ onMounted(() => {
   padding: 10px;
   word-break: break-all;
   border-left: none;
-  font-family: v-bind("style.priviewBoxStyle.font.family");
-  font-size: v-bind("style.priviewBoxStyle.font.size");
-  font-weight: v-bind("style.priviewBoxStyle.font.weight");
-  color: v-bind("style.priviewBoxStyle.font.color");
+  font-family: v-bind("style.previewBoxStyle.font.family");
+  font-size: v-bind("style.previewBoxStyle.font.size");
+  font-weight: v-bind("style.previewBoxStyle.font.weight");
+  color: v-bind("style.previewBoxStyle.font.color");
 
   background: v-bind(
-    "style.priviewBoxStyle.background.url ? style.priviewBoxStyle.background.url :'transparent'"
+    "style.previewBoxStyle.background.url ? style.previewBoxStyle.background.url :'transparent'"
   );
-  background-color: v-bind("style.priviewBoxStyle.background.color");
-  background-size: v-bind("style.priviewBoxStyle.background.size");
-  background-repeat: v-bind("style.priviewBoxStyle.background.repeat");
+  background-color: v-bind("style.previewBoxStyle.background.color");
+  background-size: v-bind("style.previewBoxStyle.background.size");
+  background-repeat: v-bind("style.previewBoxStyle.background.repeat");
 }
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-track-piece {

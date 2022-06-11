@@ -2,9 +2,9 @@ import { defineCustomElement } from "vue"
 import MyA from "./myA.ce.vue"
 import myMusic from "./myMusic.ce.vue"
 import myVideo from "./myVideo.ce.vue"
+import myCodeMd from "./myCodeMd.ce.vue"
 import myCode from "./myCode.ce.vue"
 import myTips from "./myTips.ce.vue"
-import myTextBlock from "./myTextBlock.ce.vue"
 import myIframe from "./myIframe.ce.vue"
 import myImg from "./myImg.ce.vue"
 import myEmoji from "./myEmoji.ce.vue"
@@ -28,14 +28,11 @@ const defineCustomElementsAll = () => {
   window.customElements.define("my-a", defineCustomElement(MyA))
   window.customElements.define("my-music", defineCustomElement(myMusic))
   window.customElements.define("my-video", defineCustomElement(myVideo))
+  window.customElements.define("my-code-md", defineCustomElement(myCodeMd))
   window.customElements.define("my-code", defineCustomElement(myCode))
   window.customElements.define("my-tips", defineCustomElement(myTips))
   window.customElements.define("my-iframe", defineCustomElement(myIframe))
   window.customElements.define("my-img", defineCustomElement(myImg))
-  window.customElements.define(
-    "my-text-block",
-    defineCustomElement(myTextBlock),
-  )
 }
 
 export default defineCustomElementsAll
