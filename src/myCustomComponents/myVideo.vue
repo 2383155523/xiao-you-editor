@@ -1,32 +1,54 @@
 <script setup lang="ts">
-import { defineProps, toRefs, onMounted, onUnmounted, ref } from "vue"
+import { defineProps, toRefs, onMounted, onUnmounted, shallowRef } from "vue"
 import Plyr from "plyr"
+import i18n from "@/i18n/plyr"
 import bus from "@/eventBus"
+import "plyr/dist/plyr.css"
 
-interface props {
-  src?: string
-  indexBg?: string
-}
-const props: props = defineProps({
-  indexBg: String,
-  src: String,
-})
+const props = defineProps<{
+  src: string
+}>()
 
-const { src, indexBg } = toRefs(props)
+const { src } = toRefs(props)
 
-const player = ref<null | HTMLElement>(null)
+const player = shallowRef<HTMLVideoElement>()
 
 let instance = null
+let index = 0
 
-onUnmounted(() => {
-  try {
+const unMount = () => {
+  if (instance) {
     instance.destroy()
-  } catch (error) {}
-})
-onMounted(() => {
-  instance = new Plyr(player.value)
+  }
+}
+const init = () => {
+  instance = new Plyr(player.value, {
+    i18n,
+    tooltips: {
+      controls: true,
+      seek: true,
+    },
+    controls: [
+      "play-large",
+      "restart",
+      "rewind",
+      "play",
+      "fast-forward",
+      "progress",
+      "current-time",
+      "duration",
+      "mute",
+      "volume",
+      "captions",
+      "settings",
+      // "pip",
+      "airplay",
+      "download",
+      "fullscreen",
+    ],
+  })
   bus.state.plyrIndex = bus.state.plyrIndex + 1
-  let index = bus.state.plyrIndex
+  index = bus.state.plyrIndex
   bus.state.plyrInstanceArr.push({
     index: index,
     instance: instance,
@@ -38,8 +60,9 @@ onMounted(() => {
       }
     })
   })
-  console.clear()
-})
+}
+onUnmounted(unMount)
+onMounted(init)
 </script>
 
 <template>
@@ -51,7 +74,6 @@ onMounted(() => {
       controls
       webkit-playsinline
       x-webkit-airplay="allow"
-      :data-poster="indexBg"
       preload="metadata"
     >
       <source :src="src" type="video/mp4" />
@@ -86,14 +108,10 @@ onMounted(() => {
         />
       </symbol>
       <symbol id="plyr-enter-fullscreen" viewBox="0 0 18 18">
-        <path
-          d="M10 3h3.6l-4 4L11 8.4l4-4V8h2V1h-7zM7 9.6l-4 4V10H1v7h7v-2H4.4l4-4z"
-        />
+        <path d="M10 3h3.6l-4 4L11 8.4l4-4V8h2V1h-7zM7 9.6l-4 4V10H1v7h7v-2H4.4l4-4z" />
       </symbol>
       <symbol id="plyr-exit-fullscreen" viewBox="0 0 18 18">
-        <path
-          d="M1 12h3.6l-4 4L2 17.4l4-4V17h2v-7H1zM16 .6l-4 4V1h-2v7h7V6h-3.6l4-4z"
-        />
+        <path d="M1 12h3.6l-4 4L2 17.4l4-4V17h2v-7H1zM16 .6l-4 4V1h-2v7h7V6h-3.6l4-4z" />
       </symbol>
       <symbol id="plyr-fast-forward" viewBox="0 0 18 18">
         <path d="M7.875 7.171L0 1v16l7.875-6.171V17L18 9 7.875 1z" />
@@ -119,12 +137,8 @@ onMounted(() => {
         />
       </symbol>
       <symbol id="plyr-pip" viewBox="0 0 18 18">
-        <path
-          d="M13.293 3.293L7.022 9.564l1.414 1.414 6.271-6.271L17 7V1h-6z"
-        />
-        <path
-          d="M13 15H3V5h5V3H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1v-6h-2v5z"
-        />
+        <path d="M13.293 3.293L7.022 9.564l1.414 1.414 6.271-6.271L17 7V1h-6z" />
+        <path d="M13 15H3V5h5V3H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1v-6h-2v5z" />
       </symbol>
       <symbol id="plyr-play" viewBox="0 0 18 18">
         <path
@@ -156,18 +170,8 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss">
-@import url("plyr/dist/plyr.css");
+<style lang="scss" scoped>
 .playerContainer {
-  margin-top: 20px;
-}
-.player {
-  width: 100% !important;
-  border-radius: 4px;
-}
-.plyr {
-  width: 100%;
-  border-radius: 4px;
   margin-bottom: var(--bottom);
 }
 </style>

@@ -1,71 +1,47 @@
 <script setup lang="ts">
-import { defineProps, toRefs, onMounted, shallowRef, onUpdated } from "vue"
-import ".././prism/prism.js"
-interface props {
-  lang?: string
-  top?: string
-  bottom?: string
-}
+import { defineProps, toRefs, onMounted, ref, shallowRef, onUpdated } from "vue"
+import "@/prism/prism.js"
+import "@/prism/var.scss"
+import "@/prism/codeFont.scss"
+import "@/prism/prism.css"
+import "@/prism/base.css"
 
-const props: props = defineProps({
-  lang: String,
-  top: String,
-  bottom: String,
-})
+const props = defineProps<{
+  lang: string
+  code: string
+}>()
 
-const { lang, top, bottom } = toRefs(props)
 const pre = shallowRef<HTMLPreElement>()
-let host: HTMLElement
-let el: HTMLElement
-let content: string
-
+const { lang, code } = toRefs(props)
+let codeContent: string
 const render = () => {
+  codeContent = code.value
+  codeContent = codeContent.replaceAll(`亻`, `"`)
   try {
-    content =
-      lang.value == "html" ||
-      lang.value == "vue" ||
-      lang.value == "jsx" ||
-      lang.value == "tsx"
-        ? host.innerHTML.trim()
-        : host.textContent.trim()
-    console.dir(host)
-    console.log("content:", content)
-
-    if (lang.value == "jsx" || lang.value == "tsx") {
-      content = content.replaceAll(`" ==""`, "=")
-      content = content.replaceAll(`&lt;`, "<")
-      content = content.replaceAll(`&gt;`, ">")
-      content = content.replaceAll(`"{`, "{")
-    }
-
-    const html =
-      lang.value == "html" || lang.value == "vue"
-        ? Prism.highlight(content, Prism.languages.html, "html")
-        : Prism.highlight(content, Prism.languages[lang.value], lang.value)
+    const el = pre.value
+    const html = Prism.highlight(
+      codeContent,
+      Prism.languages[lang.value == "vue" ? "html" : lang.value],
+      lang.value == "vue" ? "html" : lang.value
+    )
     el.children[0].innerHTML = html
   } catch (error) {}
 }
-onMounted(() => {
-  el = pre.value
-  host = el.parentNode.parentNode.parentNode.host
-  host.addEventListener("DOMCharacterDataModified", render, false)
-  render()
-})
-onUpdated(() => {
-  render()
-})
+
+onMounted(render) //初始化
+onUpdated(render) //更新,
 
 const copyCode = (e: MouseEvent) => {
   const oInput = document.createElement("textarea")
-  oInput.value = content
+  oInput.value = codeContent
   document.body.appendChild(oInput)
   oInput.select()
   document.execCommand("copy")
   document.body.removeChild(oInput)
-  // window.$msg.success("复制成功🎉")
+  alert("复制成功🎉")
 }
-const myCode = shallowRef<HTMLElement>()
-const header = shallowRef<HTMLElement>()
+const myCode = ref<null | HTMLElement>(null)
+const header = ref<null | HTMLElement>(null)
 let isFullScreen = false
 const fullScreen = () => {
   myCode.value.classList.toggle("my-code-fullScreen")
@@ -79,14 +55,7 @@ const fullScreen = () => {
 </script>
 
 <template>
-  <div
-    class="my-code"
-    ref="myCode"
-    :style="{
-      marginTop: top,
-      marginBottom: bottom,
-    }"
-  >
+  <div class="my-code" ref="myCode">
     <div class="header" ref="header">
       <div class="icons">
         <div class="circle one"></div>
@@ -136,17 +105,13 @@ const fullScreen = () => {
     <div class="code">
       <pre ref="pre">
     <code :class="'language-' + lang" >
-        <slot></slot>
     </code>
 </pre>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-@import url("../prism/prism");
-@import url("../prism/base.css");
-
+<style lang="scss" scoped>
 .my-code-fullScreen {
   position: fixed !important;
   width: 100vw !important;
@@ -155,7 +120,6 @@ const fullScreen = () => {
   left: 0;
   z-index: 999;
   margin: 0 !important;
-  // opacity: 1;
 }
 .header-fullScreen,
 .pre-fullScreen {
@@ -170,12 +134,9 @@ const fullScreen = () => {
 }
 
 .my-code {
-  // margin: 30px 0;
-  // margin-bottom: var(--bottom);
-  margin-top: 20px;
+  margin-bottom: var(--bottom);
   width: 100%;
   max-height: 700px;
-  opacity: 0.9;
   // transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   // &:hover {
@@ -186,7 +147,9 @@ const fullScreen = () => {
     position: relative;
     width: 100%;
     height: 30px;
-    background: rgb(40, 44, 52);
+    // background: rgb(40, 44, 52);
+    // background: #212c42 !important;
+    background: #161f32 !important;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     display: flex;
@@ -266,25 +229,27 @@ const fullScreen = () => {
     max-width: 100%;
     max-height: 670px;
     pre {
-      opacity: 0.9;
       width: 100%;
       max-height: 670px;
       border-bottom-left-radius: 4px;
       border-bottom-right-radius: 4px;
-      background: #282c34 !important;
+      // background: #282c34 !important;
+      background: #161f32 !important;
       box-sizing: border-box;
       padding: 10px;
       white-space: normal !important;
       overflow: auto;
       margin: 0;
-      font-family: "fira-code" !important;
       code {
         font-size: 17px !important;
-        font-family: "fira-code" !important;
+        // font-family: "fira-code" !important;
+        font-family: "dm" !important;
+        font-style: italic !important;
         word-spacing: normal !important;
         word-break: break-all !important;
         word-wrap: break-word !important;
-        color: #b8a965 !important;
+        // color: #b8a965 !important;
+        color: #eee !important;
       }
     }
   }

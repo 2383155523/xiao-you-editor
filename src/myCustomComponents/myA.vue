@@ -47,12 +47,13 @@ const link = () => {
   </span>
 </template>
 
-<style>
+<style lang="scss" scoped>
 .my-a {
   display: inline-block !important;
   transition: color 0.5s linear;
   position: relative;
   cursor: var(--cursor-B);
+  text-indent: 0 !important;
 }
 .my-a:hover {
   color: v-bind(color);

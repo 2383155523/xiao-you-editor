@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/editor-custom",
-    component: () => import("../components/edit-custom.vue"),
+    component: () => import("../components/editorTest1.vue"),
   },
   {
     path: "/editor-markdown",

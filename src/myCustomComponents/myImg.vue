@@ -1,6 +1,10 @@
 <template>
   <div class="img-box">
-    <img src="https://fuyouplus.oss-cn-beijing.aliyuncs.com/image/loading.gif" alt="loading" v-show="!isLoaded" />
+    <img
+      src="https://fuyouplus.oss-cn-beijing.aliyuncs.com/image/loading.gif"
+      alt="loading"
+      v-show="!isLoaded"
+    />
     <img :src="src" :alt="alt" @load="imgLoad" v-show="isLoaded" />
   </div>
 </template>
@@ -23,7 +27,7 @@ const imgLoad = () => {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .img-box {
   display: inline-block;
   max-width: 100%;

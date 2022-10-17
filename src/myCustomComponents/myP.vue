@@ -15,6 +15,6 @@ const props = defineProps({
 .my-p {
   text-indent: 1em;
   font-size: 16px;
-  margin-bottom: var(--bottom);
+  margin-bottom: 15px;
 }
 </style>

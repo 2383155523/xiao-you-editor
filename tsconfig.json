@@ -5,29 +5,24 @@
     "src/**/*",
     "src/**/*.vue",
     "lib/**/*",
-    "lib/**/*.vue",
-    "lib/*.d.ts",
-    "lib/*.ts"
+    "lib/**/*.vue"
   ],
   "compilerOptions": {
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": false,
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "jsx": "preserve",
+    "baseUrl": ".",
     "lib": [
-      "esnext",
+      "ES2022",
       "dom"
     ],
-    "baseUrl": ".",
+    // "suppressImplicitAnyIndexErrors": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "references": [
     {
-      "path": "./tsconfig.vite-config.json"
+      "path": "./tsconfig.config.json"
     }
   ]
 }

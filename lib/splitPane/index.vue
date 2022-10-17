@@ -1,35 +1,33 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
-const props = defineProps<{ layout?: string }>();
-const isVertical = computed(() => props.layout === "vertical");
-const container = ref();
+import { ref, reactive, computed } from "vue"
+const props = defineProps<{ layout?: string }>()
+const isVertical = computed(() => props.layout === "vertical")
+const container = ref()
 const state = reactive({
   dragging: false,
   split: 50,
-});
+})
 const boundSplit = computed(() => {
-  const { split } = state;
-  return split < 20 ? 20 : split > 80 ? 80 : split;
-});
-let startPosition = 0;
-let startSplit = 0;
+  const { split } = state
+  return split < 20 ? 20 : split > 80 ? 80 : split
+})
+let startPosition = 0
+let startSplit = 0
 function dragStart(e: MouseEvent) {
-  state.dragging = true;
-  startPosition = isVertical.value ? e.pageY : e.pageX;
-  startSplit = boundSplit.value;
+  state.dragging = true
+  startPosition = isVertical.value ? e.pageY : e.pageX
+  startSplit = boundSplit.value
 }
 function dragMove(e: MouseEvent) {
   if (state.dragging) {
-    const position = isVertical.value ? e.pageY : e.pageX;
-    const totalSize = isVertical.value
-      ? container.value.offsetHeight
-      : container.value.offsetWidth;
-    const dp = position - startPosition;
-    state.split = startSplit + ~~((dp / totalSize) * 100);
+    const position = isVertical.value ? e.pageY : e.pageX
+    const totalSize = isVertical.value ? container.value.offsetHeight : container.value.offsetWidth
+    const dp = position - startPosition
+    state.split = startSplit + ~~((dp / totalSize) * 100)
   }
 }
 function dragEnd() {
-  state.dragging = false;
+  state.dragging = false
 }
 </script>
 
@@ -45,17 +43,11 @@ function dragEnd() {
     @mouseup="dragEnd"
     @mouseleave="dragEnd"
   >
-    <div
-      class="left"
-      :style="{ [isVertical ? 'height' : 'width']: boundSplit + '%' }"
-    >
+    <div class="left" :style="{ [isVertical ? 'height' : 'width']: boundSplit + '%' }">
       <slot name="left" />
       <div class="dragger" @mousedown.prevent="dragStart" />
     </div>
-    <div
-      class="right"
-      :style="{ [isVertical ? 'height' : 'width']: 100 - boundSplit + '%' }"
-    >
+    <div class="right" :style="{ [isVertical ? 'height' : 'width']: 100 - boundSplit + '%' }">
       <slot name="right" />
     </div>
   </div>

@@ -18,7 +18,7 @@
         p-id="8068"
       ></path>
     </svg>
-    <slot id="solt"></slot>
+    <slot></slot>
   </div>
 </template>
 
@@ -35,21 +35,21 @@ const { center } = toRefs(props)
   font-size: 23px;
   display: flex;
   align-items: center;
-  color: var(--TextColor);
+  color: #fff;
   transition: color 0.3s linear;
   font-weight: bolder;
   margin-bottom: var(--bottom);
-  &:hover {
-    color: var(--themeColor);
-  }
-  &:hover .icon {
-    fill: var(--themeColor);
-  }
+  // &:hover {
+  //   color: var(--themeColor);
+  // }
+  // &:hover .icon {
+  //   fill: var(--themeColor);
+  // }
   .icon {
     width: 25px;
     height: 25px;
     margin-right: 5px;
-    fill: var(--TextColor);
+    fill: #fff;
     transition: color 0.3s linear;
   }
 }

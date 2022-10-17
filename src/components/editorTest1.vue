@@ -1,13 +1,16 @@
 <template>
   <div class="edit">
-    <xy-editor-custom v-model="blogContent" :utils="utils" :styles="style" />
+    <xy-editor v-model="blogContent" theme="dark" :utils="utils" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue"
-import bizhi from "../assets/bizhi.jpg"
+import bizhi from "@/assets/bizhi.jpg"
+import type { Styles } from "../../lib/index.d"
+
 const blogContent = ref("")
+
 const utils = [
   {
     template: "<my-h1>一级标题</my-h1>",
@@ -117,84 +120,53 @@ const utils = [
     icon: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDQ4IDQ4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHg9IjYiIHk9IjYiIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgcng9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTYgMTZINDIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNiAxM1YxOSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MiAxM1YxOSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==",
   },
 ]
-
-// for (let i = 1; i <= 6; i++) {
-//   utils.push({
-//     template: `<h${i} style="color:red;">i am h${i}</h${i}>\n`,
-//     icon: "https://cdn.icon-icons.com/icons2/1369/PNG/128/-title_90285.png",
-//     hooks: {
-//       beforeInsert(template) {
-//         console.log("插入前钩子", template)
-//       },
-//       inserted(template) {
-//         console.log("插入后钩子", template)
-//       },
-//     },
-//   })
-// }
-
-const style = {
-  containerStyle: {
-    borderRadius: "10px",
-    scrollBarColor: "purple",
+const styles: Styles = {
+  light: {
     background: {
       url: `url(${bizhi})`,
       size: "cover",
       repeat: "no-repeat",
-      color: "",
     },
-    font: {
-      size: "14px",
-      color: "#fff",
-      weight: "normal",
-      family: "oppo",
-    },
+    scrollBarColor: "red",
     border: {
-      width: "2px",
+      color: "#dddddd",
       style: "solid",
-      color: "#fff",
+      width: "2px",
     },
-  },
-  placeholderStyle: {
-    size: "16px",
-    color: "#fff",
-    weight: "normal",
-    family: "oppo",
-  },
-  editBoxStyle: {
-    font: {
+    placeholder: {
+      color: "#333",
+      content: "light 写点什么吧...",
       size: "16px",
-      color: "",
-      weight: "normal",
-      family: "oppo",
+      weight: "",
     },
-    background: {
-      url: "",
-      size: "cover",
-      repeat: "no-repeat",
-      color: "",
-    },
-  },
-  previewBoxStyle: {
     font: {
-      size: "14px",
-      color: "",
-      weight: "normal",
-      family: "oppo",
-    },
-    background: {
-      url: "",
-      size: "cover",
-      repeat: "no-repeat",
-      color: "",
+      color: "#333",
+      size: "16px",
+      weight: " ",
     },
   },
-  headerBoxStyle: {
+  dark: {
     background: {
-      url: "",
+      url: `url(${bizhi})`,
       size: "cover",
       repeat: "no-repeat",
-      color: "",
+    },
+    scrollBarColor: "#333",
+    border: {
+      color: "#575050",
+      style: "solid",
+      width: "2px",
+    },
+    placeholder: {
+      color: "#dfdbdb",
+      content: "dark 写点什么吧...",
+      size: "16px",
+      weight: "",
+    },
+    font: {
+      color: "red",
+      size: "16px",
+      weight: "",
     },
   },
 }
@@ -202,9 +174,8 @@ const style = {
 
 <style scoped>
 .edit {
-  width: 100%;
-  height: 98vh;
-  margin: 0 auto;
-  overflow: hidden;
+  width: 90vw;
+  height: 90vh;
+  margin: 50px auto;
 }
 </style>

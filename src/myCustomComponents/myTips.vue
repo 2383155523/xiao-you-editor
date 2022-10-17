@@ -1,7 +1,7 @@
 <template>
   <div class="tips" :class="'t-' + type">
     <div class="tip-title" :class="'t-' + type + '-text'">
-      <slot name="title">{{ replaceTypeText(type) }}</slot>
+      {{ title ? title : replaceTypeText(type) }}
     </div>
     <div class="tip-content" :class="'t-' + type + '-text'">
       <slot></slot>
@@ -15,10 +15,11 @@ import type { PropType } from "vue"
 
 interface props {
   type?: string
+  title?: string
 }
 
 const replaceTypeText = computed(() => {
-  return type => {
+  return (type: string) => {
     switch (type) {
       case "info":
         return "提示:"
@@ -38,9 +39,9 @@ const props = defineProps({
     type: String as PropType<"info" | "warn" | "error" | "success" | "primary">,
     default: "primary",
   },
-  color: String,
+  title: String,
 })
-let { type } = toRefs(props)
+let { type, title } = toRefs(props)
 </script>
 
 <style>

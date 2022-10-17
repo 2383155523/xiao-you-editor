@@ -15,12 +15,14 @@ interface plyrInstance {
   instance: instance
 }
 interface State {
+  theme: string
   musicData: Array<musicData>
   plyrInstanceArr: Array<plyrInstance>
   plyrIndex: number
 }
 
 const bus = createEventBus<State>({
+  theme: "",
   musicData: [],
   plyrInstanceArr: [],
   plyrIndex: 0,

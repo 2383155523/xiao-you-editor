@@ -1,8 +1,15 @@
-import custom from "./custom/index.vue"
-import markdown from "./markdown/index.vue"
+import type { App } from "vue"
+import editor from "./editor/index.vue"
+export * from "./renderBox/index"
+
+declare module "@vue/runtime-core" {
+  export interface GlobalComponents {
+    xyEditor: typeof editor
+  }
+}
+
 export default {
-  install(app, options) {
-    app.component("xy-editor-custom", custom)
-    app.component("xy-editor-md", markdown)
+  install(app: App) {
+    app.component("xy-editor", editor)
   },
 }

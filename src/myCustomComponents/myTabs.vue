@@ -19,15 +19,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import {
-  ref,
-  onMounted,
-  defineProps,
-  toRefs,
-  nextTick,
-  onUpdated,
-  shallowRef,
-} from "vue"
+import { ref, onMounted, defineProps, toRefs, nextTick } from "vue"
 import type { PropType } from "vue"
 const props = defineProps({
   tabs: {
@@ -36,13 +28,11 @@ const props = defineProps({
   },
 })
 const { tabs } = toRefs(props)
-
-const tabList = ref<Array<string>>()
-const activeBox = shallowRef<HTMLElement>()
-const swiperContent = shallowRef<HTMLElement>()
-const myTabs = shallowRef<HTMLElement>()
-const tabNavItems = shallowRef<Array<HTMLElement>>()
-
+const tabList = ref<Array<string>>(tabs.value.split("|"))
+const activeBox = ref<null | HTMLElement>(null)
+const swiperContent = ref<null | HTMLElement>(null)
+const myTabs = ref<null | HTMLElement>(null)
+const tabNavItems = ref<null | Array<HTMLElement>>(null)
 const tabNavItemWidth = ref<number>(0)
 const myTabsWidth = ref<number>(0)
 
@@ -66,7 +56,6 @@ const changeTab = (index: number) => {
 }
 
 const init = () => {
-  tabList.value = tabs.value.split("|")
   myTabsWidth.value =
     parseFloat(
       window
@@ -87,12 +76,6 @@ const init = () => {
 }
 
 onMounted(() => {
-  nextTick(() => {
-    init()
-  })
-})
-onUpdated(() => {
-  console.log("update")
   init()
 })
 </script>
@@ -100,14 +83,14 @@ onUpdated(() => {
 <style lang="scss" scoped>
 .my-tabs {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: var(--bottom);
   padding: 5px;
-  background: transparent;
+  background: var(--tabsBgColor);
   border-radius: 4px;
   box-sizing: border-box;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgb(239, 239, 245);
+  transition: all 0.3s var(--n-bezier);
+  border: 1px solid var(--tableBorderColor);
   .tab-navs {
     width: 100%;
     position: relative;
@@ -116,11 +99,10 @@ onUpdated(() => {
     .tab-navs-item {
       height: 40px;
       line-height: 40px;
-      // color: #333639;
-      color: #fff;
+      color: var(--tabsItemColor);
       text-align: center;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s var(--n-bezier);
       border-radius: 4px;
       span {
         position: relative;
@@ -128,32 +110,32 @@ onUpdated(() => {
       }
     }
     .tab-navs-item-active {
-      color: #409eff !important;
+      color: var(--themeColor) !important;
     }
     .active-box {
       position: absolute;
       top: 0;
       left: 0;
       height: 100%;
-      background: #fff;
+      background: var(--tabItemActive);
       z-index: 0;
       border-radius: 3px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s var(--n-bezier);
     }
   }
   .content-box {
     border-radius: 4px;
     margin-top: 5px;
     width: 100%;
-    background: transparent;
+    background: var(--tabItemActive);
     overflow: hidden;
     overflow-y: auto;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s var(--n-bezier);
     .swiper-content {
       border-radius: 4px;
       white-space: nowrap;
       width: 100%;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s var(--n-bezier);
       position: relative;
       left: 0;
       top: 0;
@@ -167,7 +149,7 @@ onUpdated(() => {
 
 *::-webkit-scrollbar-thumb {
   border-radius: 3px;
-  background-color: #409eff;
+  background-color: var(--themeColor);
   background-image: -webkit-linear-gradient(
     45deg,
     hsla(0, 0%, 100%, 0.6) 25%,

@@ -1,0 +1,60 @@
+// my-table
+.th {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--tableHoverBg);
+  color: var(--TextColor);
+  transition: all 0.3s var(--n-bezier);
+  position: fixed;
+  border-bottom: 1px solid var(--tableBorderColor);
+  box-sizing: border-box;
+  z-index: 2;
+}
+.th-td {
+  padding: 12px;
+  flex: 1;
+  font-weight: bold;
+  text-align: center;
+}
+.content {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 50px;
+  overflow-y: auto;
+  text-align: center;
+}
+.tr {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--BlockBgColor);
+  color: var(--TextColor);
+  transition: all 0.3s var(--n-bezier);
+  border-bottom: 1px solid var(--tableBorderColor);
+  box-sizing: border-box;
+  &:hover {
+    background: var(--tableHoverBg) !important;
+  }
+  &:nth-child(even) {
+    background: var(--tableOddBg);
+  }
+}
+.tr-td {
+  padding: 12px;
+  flex: 1;
+  text-align: center;
+  line-height: 30px;
+  word-break: break-all;
+}
+//my-tabs
+
+.tab-item {
+  width: 100%;
+  display: inline-block !important;
+  vertical-align: top;
+}

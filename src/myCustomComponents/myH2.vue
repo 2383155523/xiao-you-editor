@@ -49,21 +49,21 @@ const { center } = toRefs(props)
   font-size: 20px;
   display: flex;
   align-items: center;
-  color: var(--TextColor);
+  color: #fff;
   transition: color 0.3s linear;
   font-weight: bold;
   margin-bottom: var(--bottom);
-  &:hover {
-    color: var(--themeColor);
-  }
-  &:hover .icon {
-    fill: var(--themeColor);
-  }
+  // &:hover {
+  //   color: var(--themeColor);
+  // }
+  // &:hover .icon {
+  //   fill: var(--themeColor);
+  // }
   .icon {
     width: 23px;
     height: 23px;
     margin-right: 5px;
-    fill: var(--TextColor);
+    fill: #fff;
     transition: color 0.3s linear;
   }
 }
