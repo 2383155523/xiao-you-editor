@@ -38,5 +38,7 @@ export interface Styles {
 }
 export type Theme = "light" | "dark"
 export type BorderRadius = string
-export type Utils = Array<{ template: string; icon: string }>
+export type Utils = Array<{ template: string; light: { icon: string }; dark: { icon: string } }>
 export type CacheMode = boolean
+export type TransitionMode = string
+export type FontFamily = string

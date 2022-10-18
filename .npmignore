@@ -1,7 +1,8 @@
 # 忽略目录
 src/
 public/
-
+node_modules/
+scripts/
  
 # 忽略指定文件
 tsconfig.vite-config.json
@@ -14,3 +15,8 @@ vite.config.ts
 babel.config.js
 *.map
 package-lock.json
+pnpm-lock.yaml
+tsconfig.app.json
+tsconfig.config.json
+tsconfig.vitest.json
+vitest.config.ts

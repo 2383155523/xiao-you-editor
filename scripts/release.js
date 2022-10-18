@@ -47,15 +47,6 @@ function generateNewVersion() {
   let secondNumber = versionNumberList[1]
   let thirdNumber = Number(versionNumberList[2]) + 1 + ""
 
-  if (thirdNumber === "10") {
-    thirdNumber = "0"
-    secondNumber = Number(secondNumber) + 1 + ""
-  }
-  if (secondNumber === "10") {
-    secondNumber = "0"
-    firstNumber = Number(firstNumber) + 1 + ""
-  }
-
   return `${firstNumber}.${secondNumber}.${thirdNumber}`
 }
 

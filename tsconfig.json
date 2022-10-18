@@ -13,7 +13,7 @@
       "ES2022",
       "dom"
     ],
-    // "suppressImplicitAnyIndexErrors": true,
+    "suppressImplicitAnyIndexErrors": true,
     "paths": {
       "@/*": [
         "./src/*"

@@ -7,7 +7,7 @@
         :key="index"
         @click="addTemplate(item.template)"
       >
-        <img :src="item.icon" alt="" class="icon" />
+        <img :src="item[theme].icon" alt="" class="icon" />
       </div>
     </div>
     <splitPane>
@@ -24,7 +24,7 @@
             @mouseenter="editMouseEnter"
           ></textarea>
           <div class="placeholder" v-show="placeholderIsShow">
-            {{ styles[theme]?.placeholder?.content }}
+            {{ style[theme].placeholder.content }}
           </div>
         </div>
       </template>
@@ -62,7 +62,16 @@ import {
 import splitPane from "../splitPane/index.vue"
 import { renderBox } from "../renderBox/index"
 import { setStorage } from "../utils/storage"
-import type { Utils, Styles, Theme, BorderRadius, CacheMode } from "../index.d"
+import { toStr, isEmpty } from "../utils/index"
+import type {
+  Utils,
+  Styles,
+  Theme,
+  BorderRadius,
+  CacheMode,
+  TransitionMode,
+  FontFamily,
+} from "../index.d"
 /***
  * @Global
  */
@@ -84,6 +93,59 @@ const emit = defineEmits(["input", "update:modelValue"])
  * @Props
  */
 
+const defaultStyles: Styles = {
+  light: {
+    scrollBarColor: "red",
+    border: {
+      color: "#dddddd",
+      style: "solid",
+      width: "2px",
+    },
+    background: {
+      url: "",
+      repeat: "",
+      size: "",
+      color: "#fff",
+    },
+    placeholder: {
+      color: "#333",
+      content: "light 写点什么吧...",
+      size: "16px",
+      weight: "",
+    },
+    font: {
+      color: "333",
+      size: "16px",
+      weight: "",
+    },
+  },
+  dark: {
+    scrollBarColor: "#333",
+    border: {
+      color: "#575050",
+      style: "solid",
+      width: "2px",
+    },
+    background: {
+      url: "",
+      repeat: "",
+      size: "",
+      color: "#303133",
+    },
+    placeholder: {
+      color: "#dfdbdb",
+      content: "dark 写点什么吧...",
+      size: "16px",
+      weight: "",
+    },
+    font: {
+      color: "#dfdbdb",
+      size: "16px",
+      weight: "",
+    },
+  },
+}
+
 const props = withDefaults(
   defineProps<{
     modelValue: string
@@ -92,69 +154,53 @@ const props = withDefaults(
     theme: Theme
     borderRadius?: BorderRadius
     cacheMode?: CacheMode
+    transitionMode?: TransitionMode
+    fontFamily?: FontFamily
   }>(),
   {
+    fontFamily: "",
+    transitionMode: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     cacheMode: true,
     modelValue: "",
     borderRadius: "20px",
-    styles: () => ({
-      light: {
-        scrollBarColor: "red",
-        border: {
-          color: "#dddddd",
-          style: "solid",
-          width: "2px",
-        },
-        background: {
-          url: "",
-          repeat: "",
-          size: "",
-          color: "#fff",
-        },
-        placeholder: {
-          color: "#333",
-          content: "light 写点什么吧...",
-          size: "16px",
-          weight: "",
-        },
-        font: {
-          color: "333",
-          size: "16px",
-          weight: " ",
-        },
-      },
-      dark: {
-        scrollBarColor: "#333",
-        border: {
-          color: "#575050",
-          style: "solid",
-          width: "2px",
-        },
-        background: {
-          url: "",
-          repeat: "",
-          size: "",
-          color: "#303133",
-        },
-        placeholder: {
-          color: "#dfdbdb",
-          content: "dark 写点什么吧...",
-          size: "16px",
-          weight: "",
-        },
-        font: {
-          color: "#dfdbdb",
-          size: "16px",
-          weight: "",
-        },
-      },
-    }),
     utils: () => [],
+    styles: () => ({} as Styles),
     theme: "light",
   }
 )
 
-const { modelValue, theme, styles, borderRadius, cacheMode } = toRefs(props)
+const { modelValue, theme, borderRadius, cacheMode, styles, transitionMode, fontFamily } =
+  toRefs(props)
+const style = ref<Styles>({} as Styles)
+
+function diffAndMergeStyles(origin: Styles, target: Styles): Styles {
+  const styles = {} as Styles
+
+  for (let key in origin) {
+    if (toStr(origin[key]) === "Object") {
+      styles[key] = diffAndMergeStyles(origin[key], isEmpty(target) ? target : target[key])
+    } else {
+      if (isEmpty(target)) {
+        styles[key] = origin[key]
+      } else {
+        styles[key] = target[key] ? target[key] : origin[key]
+      }
+    }
+  }
+  return styles
+}
+
+watch(
+  styles,
+  (styles: Styles) => {
+    style.value = diffAndMergeStyles(defaultStyles, styles)
+    console.log("style=", style.value)
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+)
 
 /**
  *@Data
@@ -316,21 +362,23 @@ onMounted(() => {
 .editContainer {
   width: 100%;
   height: 100%;
-  background-image: v-bind("styles[theme].background.url");
-  background-color: v-bind("styles[theme].background.color");
-  background-size: v-bind("styles[theme].background.size");
-  background-repeat: v-bind("styles[theme].background.repeat");
+  background-image: v-bind("style[theme].background.url");
+  background-color: v-bind("style[theme].background.color");
+  background-size: v-bind("style[theme].background.size");
+  background-repeat: v-bind("style[theme].background.repeat");
   border-radius: v-bind("borderRadius");
-  border-color: v-bind("styles[theme].border.color");
-  border-width: v-bind("styles[theme].border.width");
-  border-style: v-bind("styles[theme].border.style");
+  border-color: v-bind("style[theme].border.color");
+  border-width: v-bind("style[theme].border.width");
+  border-style: v-bind("style[theme].border.style");
+  transition: v-bind("transitionMode");
 }
 .editContainer .header {
   width: 100%;
   box-sizing: border-box;
-  border-bottom-color: v-bind("styles[theme].border.color");
-  border-bottom-width: v-bind("styles[theme].border.width");
-  border-bottom-style: v-bind("styles[theme].border.style");
+  border-bottom-color: v-bind("style[theme].border.color");
+  border-bottom-width: v-bind("style[theme].border.width");
+  border-bottom-style: v-bind("style[theme].border.style");
+  transition: v-bind("transitionMode");
   height: 50px;
   display: flex;
   align-items: center;
@@ -360,9 +408,11 @@ onMounted(() => {
   position: absolute;
   top: 10px;
   left: 10px;
-  font-size: v-bind("styles[theme].placeholder.size");
-  font-weight: v-bind("styles[theme].placeholder.weight");
-  color: v-bind("styles[theme].placeholder.color");
+  font-size: v-bind("style[theme].placeholder.size");
+  font-weight: v-bind("style[theme].placeholder.weight");
+  color: v-bind("style[theme].placeholder.color");
+  transition: v-bind("transitionMode");
+  font-family: v-bind("fontFamily");
 }
 .editBox .edit {
   width: 100%;
@@ -370,20 +420,20 @@ onMounted(() => {
   height: 100%;
   border-bottom-left-radius: v-bind("borderRadius");
   border: none;
-  font-size: 16px;
+  font-size: v-bind("style[theme].font.size");
   padding: 10px;
   box-sizing: border-box;
   resize: none;
   outline: none;
-  color: v-bind("styles[theme].font.color");
-  border-right-color: v-bind("styles[theme].border.color");
-  border-right-width: v-bind("styles[theme].border.width");
-  border-right-style: v-bind("styles[theme].border.style");
+  color: v-bind("style[theme].font.color ");
+  border-right-color: v-bind("style[theme].border.color");
+  border-right-width: v-bind("style[theme].border.width");
+  border-right-style: v-bind("style[theme].border.style");
   overflow-x: hidden;
   word-break: break-all;
-  font-family: "oppo";
   background: transparent;
-  transition: all 0.3s linear;
+  transition: v-bind("transitionMode");
+  font-family: v-bind("fontFamily");
 }
 
 .previewBox {
@@ -402,7 +452,9 @@ onMounted(() => {
   word-break: break-all;
   border-left: none;
   background: transparent;
-  color: v-bind("styles[theme].font.color");
+  color: v-bind("style[theme].font.color");
+  transition: v-bind("transitionMode");
+  font-family: v-bind("fontFamily");
 }
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-track-piece {
@@ -411,7 +463,8 @@ onMounted(() => {
 
 *::-webkit-scrollbar-thumb {
   border-radius: 3px;
-  background-color: v-bind("styles[theme].scrollBarColor");
+  background-color: v-bind("style[theme].scrollBarColor");
+  transition: v-bind("transitionMode");
   background-image: -webkit-linear-gradient(
     45deg,
     hsla(0, 0%, 100%, 0.6) 25%,
@@ -430,16 +483,19 @@ onMounted(() => {
 }
 * ::selection {
   color: #fff;
-  background-color: v-bind("styles[theme].scrollBarColor");
+  background-color: v-bind("style[theme].scrollBarColor");
+  transition: v-bind("transitionMode");
 }
 
 * ::-moz-selection {
   color: #fff;
-  background-color: v-bind("styles[theme].scrollBarColor");
+  background-color: v-bind("style[theme].scrollBarColor");
+  transition: v-bind("transitionMode");
 }
 
 *::-webkit-selection {
   color: #fff;
-  background-color: v-bind("styles[theme].scrollBarColor");
+  background-color: v-bind("style[theme].scrollBarColor");
+  transition: v-bind("transitionMode");
 }
 </style>

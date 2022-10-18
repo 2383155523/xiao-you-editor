@@ -16,7 +16,7 @@ import myTips from "./myTips.vue"
 import myA from "./myA.vue"
 import myDel from "./myDel.vue"
 
-declare module "@vue/runtime-core" {
+declare module "vue" {
   export interface GlobalComponents {
     ["my-video"]: typeof myVideo
     ["my-code"]: typeof myCode

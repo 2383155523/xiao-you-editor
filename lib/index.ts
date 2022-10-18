@@ -2,7 +2,7 @@ import type { App } from "vue"
 import editor from "./editor/index.vue"
 export * from "./renderBox/index"
 
-declare module "@vue/runtime-core" {
+declare module "vue" {
   export interface GlobalComponents {
     xyEditor: typeof editor
   }
