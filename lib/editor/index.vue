@@ -61,17 +61,8 @@ import {
 } from "vue"
 import splitPane from "../splitPane/index.vue"
 import { renderBox } from "../renderBox/index"
-import { setStorage } from "../utils/storage"
 import { toStr, isEmpty } from "../utils/index"
-import type {
-  Utils,
-  Styles,
-  Theme,
-  BorderRadius,
-  CacheMode,
-  TransitionMode,
-  FontFamily,
-} from "../index.d"
+import type { Utils, Styles, Theme, BorderRadius, TransitionMode, FontFamily } from "../index.d"
 /***
  * @Global
  */
@@ -153,14 +144,12 @@ const props = withDefaults(
     utils: Utils
     theme: Theme
     borderRadius?: BorderRadius
-    cacheMode?: CacheMode
     transitionMode?: TransitionMode
     fontFamily?: FontFamily
   }>(),
   {
     fontFamily: "",
     transitionMode: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-    cacheMode: true,
     modelValue: "",
     borderRadius: "20px",
     utils: () => [],
@@ -169,8 +158,7 @@ const props = withDefaults(
   }
 )
 
-const { modelValue, theme, borderRadius, cacheMode, styles, transitionMode, fontFamily } =
-  toRefs(props)
+const { modelValue, theme, borderRadius, styles, transitionMode, fontFamily } = toRefs(props)
 const style = ref<Styles>({} as Styles)
 
 function diffAndMergeStyles(origin: Styles, target: Styles): Styles {
@@ -194,7 +182,7 @@ watch(
   styles,
   (styles: Styles) => {
     style.value = diffAndMergeStyles(defaultStyles, styles)
-    console.log("style=", style.value)
+    // console.log("style=", style.value)
   },
   {
     immediate: true,
@@ -274,6 +262,7 @@ const previewScroll = () => {
 const previewMouseEnter = () => {
   isLeft = false
 }
+
 const insertEdit = (str: string) => {
   if (document.selection) {
     edit!.value!.focus()
@@ -281,7 +270,6 @@ const insertEdit = (str: string) => {
     sel.text = str
     sel.select()
   }
-
   //火狐/网景 浏览器
   // || edit!.value!.selectionStart == "0"
   else if (edit!.value!.selectionStart) {
@@ -337,10 +325,6 @@ watch(
       })
     } else {
       template.value = newVal
-    }
-    if (cacheMode.value) {
-      //开启缓存模式 本地缓存模板信息
-      setStorage("xy_editor_template", template.value)
     }
   },
   {

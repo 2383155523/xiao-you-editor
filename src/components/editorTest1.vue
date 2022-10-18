@@ -6,15 +6,14 @@
       :utils="utils"
       border-radius="20px"
       font-family="HarmonyOS_Sans_SC_Medium"
-      :styles="styles"
     />
+    <!-- :styles="styles" -->
     <button @click="changeTheme">changeTheme</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue"
-
 import { styles } from "./editorConfig/styles"
 import { utils } from "./editorConfig/utils"
 
