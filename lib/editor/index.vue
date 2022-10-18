@@ -3,7 +3,7 @@
     <div class="header">
       <div
         class="item"
-        v-for="(item, index) in utils"
+        v-for="(item, index) in templates"
         :key="index"
         @click="addTemplate(item.template)"
       >
@@ -62,7 +62,15 @@ import {
 import splitPane from "../splitPane/index.vue"
 import { renderBox } from "../renderBox/index"
 import { toStr, isEmpty } from "../utils/index"
-import type { Utils, Styles, Theme, BorderRadius, TransitionMode, FontFamily } from "../index.d"
+import type {
+  Templates,
+  Styles,
+  Theme,
+  BorderRadius,
+  TransitionMode,
+  FontFamily,
+  CustomParser,
+} from "../index.d"
 /***
  * @Global
  */
@@ -141,24 +149,27 @@ const props = withDefaults(
   defineProps<{
     modelValue: string
     styles?: Styles
-    utils: Utils
+    templates: Templates
     theme: Theme
     borderRadius?: BorderRadius
     transitionMode?: TransitionMode
     fontFamily?: FontFamily
+    customParser?: CustomParser
   }>(),
   {
     fontFamily: "",
     transitionMode: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     modelValue: "",
     borderRadius: "20px",
-    utils: () => [],
+    templates: () => [],
     styles: () => ({} as Styles),
     theme: "light",
+    customParser: () => [],
   }
 )
 
-const { modelValue, theme, borderRadius, styles, transitionMode, fontFamily } = toRefs(props)
+const { modelValue, theme, borderRadius, styles, transitionMode, fontFamily, customParser } =
+  toRefs(props)
 const style = ref<Styles>({} as Styles)
 
 function diffAndMergeStyles(origin: Styles, target: Styles): Styles {
@@ -307,22 +318,17 @@ const insertEdit = (str: string) => {
  */
 
 watch(nativeEditValue, () => setNativeEditValue())
-//parse code RegExp
-const reg =
-  / {0,3}\n*(`{3,}(?=[^`\n]*\n)|~{3,})([^\n]*)\n(?:|([\s\S]*?)\n)(?: {0,3}\1[~`]* *(?=\n|$)|$)/g
+
 watch(
   modelValue,
   (newVal: string) => {
     placeholderIsShow.value = newVal.length == 0
-    if (reg.test(newVal)) {
-      template.value = newVal.replace(reg, (...arg) => {
-        const lang = arg[2].trim()
-        let code = arg[3]
-        if (code) {
-          code = code.replaceAll(`"`, `亻`)
-        }
-        return `<my-code lang="${lang}" code="${code}"></my-code>`
+    if (customParser.value.length) {
+      let templateCache: string = ""
+      customParser.value.forEach((render: (template: string) => string) => {
+        templateCache = render(newVal)
       })
+      template.value = templateCache
     } else {
       template.value = newVal
     }

@@ -3,9 +3,10 @@
     <xy-editor
       v-model="blogContent"
       :theme="theme"
-      :utils="utils"
+      :templates="templates"
       border-radius="20px"
       font-family="HarmonyOS_Sans_SC_Medium"
+      :custom-parser="customParser"
     />
     <!-- :styles="styles" -->
     <button @click="changeTheme">changeTheme</button>
@@ -15,7 +16,27 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { styles } from "./editorConfig/styles"
-import { utils } from "./editorConfig/utils"
+import { templates } from "./editorConfig/templates"
+
+const customParser = [
+  (template: string) => {
+    //parse code RegExp
+    let templateReplaceContent = template
+    const reg =
+      / {0,3}\n*(`{3,}(?=[^`\n]*\n)|~{3,})([^\n]*)\n(?:|([\s\S]*?)\n)(?: {0,3}\1[~`]* *(?=\n|$)|$)/g
+    if (reg.test(template)) {
+      templateReplaceContent = template.replace(reg, (...arg) => {
+        const lang = arg[2].trim()
+        let code = arg[3]
+        if (code) {
+          code = code.replaceAll(`"`, `亻`)
+        }
+        return `<my-code lang="${lang}" code="${code}"></my-code>`
+      })
+    }
+    return templateReplaceContent
+  },
+]
 
 const blogContent = ref("")
 const theme = ref<"light" | "dark">("dark")
