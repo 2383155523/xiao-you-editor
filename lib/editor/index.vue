@@ -1,6 +1,6 @@
 <template>
   <div class="editContainer">
-    <div class="header">
+    <div class="header" v-show="templates.length">
       <div
         class="item"
         v-for="(item, index) in templates"
@@ -12,7 +12,12 @@
     </div>
     <splitPane>
       <template #left>
-        <div class="editBox">
+        <div
+          class="editBox"
+          :style="{
+            height: templates.length ? 'calc(100% - 50px)' : '100%',
+          }"
+        >
           <textarea
             name="write"
             class="edit"
@@ -30,14 +35,19 @@
       </template>
 
       <template #right>
-        <div class="previewBox">
+        <div
+          class="previewBox"
+          :style="{
+            height: templates.length ? 'calc(100% - 50px)' : '100%',
+          }"
+        >
           <div
             class="preview"
             ref="preview"
             @scroll="previewScroll"
             @mouseenter="previewMouseEnter"
           >
-            <renderBox :template="template" />
+            <renderBox :template="template" :custom-parser="customParser" />
           </div>
         </div>
       </template>
@@ -108,7 +118,7 @@ const defaultStyles: Styles = {
     },
     placeholder: {
       color: "#333",
-      content: "light 写点什么吧...",
+      content: "写点什么吧...",
       size: "16px",
       weight: "",
     },
@@ -119,7 +129,7 @@ const defaultStyles: Styles = {
     },
   },
   dark: {
-    scrollBarColor: "#333",
+    scrollBarColor: "purple",
     border: {
       color: "#575050",
       style: "solid",
@@ -133,7 +143,7 @@ const defaultStyles: Styles = {
     },
     placeholder: {
       color: "#dfdbdb",
-      content: "dark 写点什么吧...",
+      content: "写点什么吧...",
       size: "16px",
       weight: "",
     },
@@ -193,7 +203,6 @@ watch(
   styles,
   (styles: Styles) => {
     style.value = diffAndMergeStyles(defaultStyles, styles)
-    // console.log("style=", style.value)
   },
   {
     immediate: true,
@@ -323,15 +332,7 @@ watch(
   modelValue,
   (newVal: string) => {
     placeholderIsShow.value = newVal.length == 0
-    if (customParser.value.length) {
-      let templateCache: string = ""
-      customParser.value.forEach((render: (template: string) => string) => {
-        templateCache = render(newVal)
-      })
-      template.value = templateCache
-    } else {
-      template.value = newVal
-    }
+    template.value = newVal
   },
   {
     immediate: true,
@@ -361,6 +362,7 @@ onMounted(() => {
   border-width: v-bind("style[theme].border.width");
   border-style: v-bind("style[theme].border.style");
   transition: v-bind("transitionMode");
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .editContainer .header {
   width: 100%;
@@ -391,7 +393,6 @@ onMounted(() => {
 
 .editBox {
   flex: 1;
-  height: calc(100% - 50px);
   position: relative;
 }
 .editBox .placeholder {
@@ -419,8 +420,10 @@ onMounted(() => {
   border-right-color: v-bind("style[theme].border.color");
   border-right-width: v-bind("style[theme].border.width");
   border-right-style: v-bind("style[theme].border.style");
-  overflow-x: hidden;
   word-break: break-all;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   background: transparent;
   transition: v-bind("transitionMode");
   font-family: v-bind("fontFamily");
@@ -428,7 +431,6 @@ onMounted(() => {
 
 .previewBox {
   flex: 1;
-  height: calc(100% - 50px);
 }
 
 .previewBox .preview {
@@ -440,11 +442,15 @@ onMounted(() => {
   box-sizing: border-box;
   padding: 10px;
   word-break: break-all;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   border-left: none;
   background: transparent;
   color: v-bind("style[theme].font.color");
   transition: v-bind("transitionMode");
   font-family: v-bind("fontFamily");
+  overflow-x: hidden;
 }
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-track-piece {

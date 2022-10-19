@@ -1,91 +1,156 @@
 /* PrismJS 1.29.0
 https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+abap+abnf+actionscript+ada+agda+al+antlr4+apacheconf+apex+apl+applescript+aql+arduino+arff+asciidoc+aspnet+asm6502+asmatmel+autohotkey+autoit+avisynth+avro-idl+bash+basic+batch+bbcode+bicep+birb+bison+bnf+brainfuck+brightscript+bro+bsl+c+csharp+cpp+cfscript+chaiscript+cil+clojure+cmake+cobol+coffeescript+concurnas+csp+cooklang+coq+crystal+css-extras+csv+cypher+d+dart+dataweave+dax+dhall+diff+django+dns-zone-file+docker+dot+ebnf+editorconfig+eiffel+ejs+elixir+elm+etlua+erb+erlang+excel-formula+fsharp+factor+false+firestore-security-rules+flow+fortran+ftl+gml+gap+gcode+gdscript+gedcom+gherkin+git+glsl+gn+go+go-module+graphql+groovy+haml+handlebars+haskell+haxe+hcl+hlsl+hoon+http+hpkp+hsts+ichigojam+icon+icu-message-format+idris+ignore+inform7+ini+io+j+java+javadoc+javadoclike+javastacktrace+jexl+jolie+jq+jsdoc+js-extras+json+json5+jsonp+jsstacktrace+js-templates+julia+keepalived+keyman+kotlin+kumir+kusto+latex+latte+less+lilypond+liquid+lisp+livescript+llvm+log+lolcode+lua+magma+makefile+markdown+markup-templating+matlab+maxscript+mel+mermaid+mizar+mongodb+monkey+moonscript+n1ql+n4js+nand2tetris-hdl+naniscript+nasm+neon+nevod+nginx+nim+nix+nsis+objectivec+ocaml+opencl+openqasm+oz+parigp+parser+pascal+pascaligo+psl+pcaxis+peoplecode+perl+php+phpdoc+php-extras+plsql+powerquery+powershell+processing+prolog+promql+properties+protobuf+pug+puppet+pure+purebasic+purescript+python+qsharp+q+qml+qore+r+racket+cshtml+jsx+tsx+reason+regex+rego+renpy+rest+rip+roboconf+robotframework+ruby+rust+sas+sass+scss+scala+scheme+shell-session+smali+smalltalk+smarty+sml+solidity+solution-file+soy+sparql+splunk-spl+sqf+sql+squirrel+stan+iecst+stylus+swift+systemd+t4-templating+t4-cs+t4-vb+tap+tcl+tt2+textile+toml+tremor+turtle+twig+typescript+typoscript+unrealscript+uorazor+uri+v+vala+vbnet+velocity+verilog+vhdl+vim+visual-basic+warpscript+wasm+web-idl+wiki+wolfram+wren+xeora+xml-doc+xojo+xquery+yaml+yang+zig&plugins=inline-color */
-code[class*="language-"],
-pre[class*="language-"] {
-  color: #ccc;
-  background: 0 0;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  font-size: 1em;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
+#code {
+  padding: 10px;
+  padding-top: 0;
+  font-size: 18px !important;
+  /* font-family: "dm" !important; */
+  /* font-style: italic !important; */
+  font-family: "fira-code";
+  word-break: break-all !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  color: rgb(209, 205, 205) !important;
 }
-pre[class*="language-"] {
-  padding: 1em;
-  margin: 0.5em 0;
+
+pre {
+  width: 100%;
+  max-height: 670px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background: #161f32 !important;
+  box-sizing: border-box;
   overflow: auto;
+  margin: 0;
 }
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  background: #2d2d2d;
+
+.token.block-comment {
+  color: #637777 !important;
 }
-:not(pre) > code[class*="language-"] {
-  padding: 0.1em;
-  border-radius: 0.3em;
-  white-space: normal;
+.token.block-comment span {
+  color: #637777 !important;
 }
-.token.block-comment,
-.token.cdata,
-.token.comment,
-.token.doctype,
+.token.cdata {
+  color: #c792ea;
+}
+.token.comment {
+  color: #637777 !important;
+}
+.token.comment span {
+  color: #637777 !important;
+}
+.token.doctype {
+  color: #67b0e8;
+}
+.token.doctype-tag {
+  color: #67b0e8;
+}
 .token.prolog {
-  color: #999;
+  color: #c792ea;
 }
 .token.punctuation {
-  color: #ccc;
+  color: #c792ea;
 }
-.token.attr-name,
-.token.deleted,
-.token.namespace,
+.token.attr-name {
+  color: #67b0e8;
+}
+.token.attr-value {
+  color: #6bc568;
+}
+.token.deleted {
+  color: #c792ea;
+}
+.token.namespace {
+  color: #c792ea;
+}
 .token.tag {
-  color: #e2777a;
+  color: #67b0e8;
 }
 .token.function-name {
-  color: #6196cc;
 }
-.token.boolean,
-.token.function,
+.token.boolean {
+  color: #f78c6c;
+}
+.token.literal-property {
+}
+.token.unit {
+  color: #f78c6c;
+}
+.token.function-variable {
+  color: #c792ea;
+}
+.token.function {
+  color: #c792ea;
+}
 .token.number {
-  color: #f08d49;
+  color: #f78c6c;
 }
-.token.class-name,
-.token.constant,
-.token.property,
+.token.class {
+  color: #ffcb8b;
+}
+.token.color {
+  color: #e5c76b;
+}
+.token.class-name {
+  color: #ffcb8b;
+}
+.token.constant {
+  color: #82aaff;
+}
+.token.property {
+  color: #80cbc4;
+}
 .token.symbol {
-  color: #f8c555;
+  color: #80cbc4;
 }
-.token.atrule,
-.token.builtin,
-.token.important,
-.token.keyword,
+.token.atrule {
+  color: #80cbc4;
+}
+.token.builtin {
+  color: #82aaff;
+}
+
+.token.keyword {
+  color: #7fdbca;
+}
 .token.selector {
-  color: #cc99cd;
+  color: #82aaff !important;
 }
-.token.attr-value,
-.token.char,
-.token.regex,
-.token.string,
+.token.selector span {
+  color: #82aaff !important;
+}
+
+.token.char {
+  color: #82aaff;
+}
+.token.regex-source {
+  color: #82aaff;
+}
+.token.regex-flags {
+  color: #f78c6c;
+}
+.token.regex {
+  color: #e5c76b;
+}
+.token.string {
+  color: #addb67;
+}
+.token.parameter {
+  color: #d9e6eb;
+}
 .token.variable {
-  color: #7ec699;
 }
-.token.entity,
-.token.operator,
+.token.entity {
+}
+.token.operator {
+  color: #7fdbca;
+}
 .token.url {
-  color: #67cdcc;
 }
-.token.bold,
+.token.bold {
+}
 .token.important {
-  font-weight: 700;
+  color: #8ad8d1;
 }
 .token.italic {
   font-style: italic;

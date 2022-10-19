@@ -3,9 +3,6 @@ import vue from "@vitejs/plugin-vue"
 const { resolve } = require("path")
 
 export default defineConfig({
-  define: {
-    _VUE_OPTIONS_API_: JSON.stringify(false),
-  },
   build: {
     cssCodeSplit: false,
     chunkSizeWarningLimit: 1024,

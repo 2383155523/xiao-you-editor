@@ -1,6 +1,6 @@
 import { defineComponent } from "vue"
 import { nodesTransformVNodes, templateTransformNodes } from "xiao-you-transform-v3"
-import type { Component } from "vue"
+import type { Component, PropType } from "vue"
 
 interface Cop {
   [key: string]: Component
@@ -35,10 +35,34 @@ function init(template: string, globalComponents: Cop) {
 }
 
 export const renderBox = defineComponent({
+  data() {
+    return {
+      parseTemplateContent: "",
+    }
+  },
+  watch: {
+    template: {
+      handler(newVal: string) {
+        let templateCache: string = newVal
+        if (this!.customParser!.length) {
+          this!.customParser!.forEach((render: (template: string) => string) => {
+            templateCache = render(templateCache)
+          })
+          console.log("templateCache=", templateCache)
+          this.parseTemplateContent = templateCache
+        }
+      },
+      immediate: true,
+    },
+  },
   props: {
     template: String,
+    customParser: Array as PropType<Array<(template: string) => string>>,
   },
   render() {
-    return init(`<div>${this.template}</div>`, this.$root!.$.appContext.components as Cop)
+    return init(
+      `<div>${this.parseTemplateContent}</div>`,
+      this.$root!.$.appContext.components as Cop
+    )
   },
 })

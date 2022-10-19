@@ -3,12 +3,13 @@
     <xy-editor
       v-model="blogContent"
       :theme="theme"
-      :templates="templates"
-      border-radius="20px"
+      border-radius="15px"
       font-family="HarmonyOS_Sans_SC_Medium"
       :custom-parser="customParser"
+      :styles="styles"
     />
-    <!-- :styles="styles" -->
+    <!-- :templates="templates" -->
+
     <button @click="changeTheme">changeTheme</button>
   </div>
 </template>
@@ -20,14 +21,16 @@ import { templates } from "./editorConfig/templates"
 
 const customParser = [
   (template: string) => {
-    //parse code RegExp
+    //Parse code RegExp
     let templateReplaceContent = template
     const reg =
       / {0,3}\n*(`{3,}(?=[^`\n]*\n)|~{3,})([^\n]*)\n(?:|([\s\S]*?)\n)(?: {0,3}\1[~`]* *(?=\n|$)|$)/g
     if (reg.test(template)) {
+      console.log("code")
       templateReplaceContent = template.replace(reg, (...arg) => {
+        console.log(arg)
         const lang = arg[2].trim()
-        let code = arg[3]
+        let code = arg[3] ?? ""
         if (code) {
           code = code.replaceAll(`"`, `亻`)
         }

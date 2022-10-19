@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, toRefs, onMounted, onUnmounted, shallowRef, onUpdated } from "vue"
+import { defineProps, toRefs, onMounted, onUnmounted, shallowRef, watch } from "vue"
 import APlayer from "aplayer"
 import "aplayer/dist/APlayer.min.css"
 
@@ -13,6 +13,7 @@ const props = defineProps<{
   img?: string
   lrc?: string
 }>()
+
 const { id, src, name, author, img, lrc } = toRefs(props)
 let instance = null
 
@@ -65,12 +66,12 @@ const init = () => {
 }
 const unMount = () => {
   if (instance) {
+    console.log("unMount")
     instance.destroy()
   }
 }
-
+watch(props, init)
 onUnmounted(unMount)
-onUpdated(init)
 onMounted(init)
 </script>
 
@@ -81,6 +82,7 @@ onMounted(init)
 <style lang="scss" scoped>
 .aplayer {
   margin-bottom: var(--bottom);
+  white-space: normal !important;
 }
 .aplayer:deep(.aplayer-title) {
   color: #333;

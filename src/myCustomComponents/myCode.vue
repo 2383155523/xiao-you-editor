@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { defineProps, toRefs, onMounted, ref, shallowRef, onUpdated } from "vue"
 import "@/prism/prism.js"
-import "@/prism/var.scss"
-import "@/prism/codeFont.scss"
-import "@/prism/prism.css"
-import "@/prism/base.css"
+import "@/prism/codeThemes/Pinia/font.css"
+import "@/prism/codeThemes/Pinia/index.css"
 
 const props = defineProps<{
   lang: string
@@ -104,8 +102,8 @@ const fullScreen = () => {
     </div>
     <div class="code">
       <pre ref="pre">
-    <code :class="'language-' + lang" >
-    </code>
+    <div :class="['language-' + lang]" id="code" >
+    </div>
 </pre>
     </div>
   </div>
@@ -228,30 +226,7 @@ const fullScreen = () => {
     width: 100%;
     max-width: 100%;
     max-height: 670px;
-    pre {
-      width: 100%;
-      max-height: 670px;
-      border-bottom-left-radius: 4px;
-      border-bottom-right-radius: 4px;
-      // background: #282c34 !important;
-      background: #161f32 !important;
-      box-sizing: border-box;
-      padding: 10px;
-      white-space: normal !important;
-      overflow: auto;
-      margin: 0;
-      code {
-        font-size: 17px !important;
-        // font-family: "fira-code" !important;
-        font-family: "dm" !important;
-        font-style: italic !important;
-        word-spacing: normal !important;
-        word-break: break-all !important;
-        word-wrap: break-word !important;
-        // color: #b8a965 !important;
-        color: #eee !important;
-      }
-    }
+    // opacity: 0.9;
   }
 }
 
