@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="my-h2"
-    :style="{
-      justifyContent: center ? 'center' : '',
-    }"
-  >
+  <div class="my-h2">
     <svg
       t="1647921649819"
       class="icon"
@@ -37,11 +32,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, toRefs } from "vue"
-const props = defineProps({
-  center: Boolean,
-})
-const { center } = toRefs(props)
+import { defineProps } from "vue"
+defineProps<{
+  center: boolean
+}>()
 </script>
 
 <style lang="scss" scoped>
@@ -53,6 +47,7 @@ const { center } = toRefs(props)
   transition: color 0.3s linear;
   font-weight: bold;
   margin-bottom: var(--bottom);
+  justify-content: v-bind("center ? 'center' : '' ");
   // &:hover {
   //   color: var(--themeColor);
   // }

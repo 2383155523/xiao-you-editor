@@ -1,0 +1,196 @@
+/* Modify by  https://prism-theme-vars.netlify.app/ 
+   Creator:antfu
+   Github:https://github.com/antfu
+ */
+
+.code-header {
+  background: #1e1e1e;
+}
+pre {
+  width: 100%;
+  max-height: 670px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background: #1e1e1e;
+  box-sizing: border-box;
+  overflow: auto;
+  margin: 0;
+}
+#code {
+  padding: 10px;
+  padding-top: 0;
+  font-size: 18px !important;
+  font-family: "fira-code";
+  word-break: break-all !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  color: rgb(209, 205, 205) !important;
+}
+.token.foreground {
+  color: #d4cfbf;
+}
+.token.block-comment {
+  color: #758575 !important;
+}
+.token.block-comment span {
+  color: #758575 !important;
+}
+.token.cdata {
+  color: #c792ea;
+}
+.token.comment {
+  color: #758575 !important;
+}
+.token.comment span {
+  color: #758575 !important;
+}
+.token.doctype {
+  color: #67b0e8;
+}
+.token.doctype-tag {
+  color: #67b0e8;
+}
+.token.prolog {
+  color: #c792ea;
+}
+.token.punctuation {
+  color: #858585;
+}
+.token.decorator {
+  color: #bd8f8f;
+}
+.token.attr-name {
+  color: #67b0e8;
+}
+.token.attr-value {
+  color: #6bc568;
+}
+.token.deleted {
+  color: #a14f55;
+}
+.token.namespace {
+  color: #db889a;
+}
+.token.tag {
+  color: #67b0e8;
+}
+.token.function-name {
+  color: #a1b567;
+}
+.token.boolean {
+  color: #1c6b48;
+}
+.token.literal-property {
+  color: #dd8e6e;
+}
+.token.unit {
+  color: #6394bf;
+}
+.token.function-variable {
+  color: #a1b567;
+}
+.token.function {
+  color: #a1b567;
+}
+.token.number {
+  color: #6394bf;
+}
+.token.class {
+  color: #54b1bf;
+}
+.token.color {
+  color: #e5c76b;
+}
+.token.class-name {
+  color: #54b1bf;
+}
+.token.constant {
+  color: #82aaff;
+}
+.token.property {
+  color: #dd8e6e;
+}
+.token.symbol {
+  color: #80cbc4;
+}
+.token.atrule {
+  color: #80cbc4;
+}
+.token.builtin {
+  color: #e0a569;
+}
+
+.token.keyword {
+  color: #4d9375;
+}
+.token.selector {
+  color: #82aaff !important;
+}
+.token.selector span {
+  color: #82aaff !important;
+}
+
+.token.char {
+  color: #82aaff;
+}
+.token.regex-source {
+  color: #82aaff;
+}
+.token.regex-flags {
+  color: #f78c6c;
+}
+.token.regex {
+  color: #ab5e3f;
+}
+.token.json-property {
+  color: #6b8b9e;
+}
+.token.string {
+  color: #d48372;
+}
+.token.parameter {
+  color: #d9e6eb;
+}
+.token.variable {
+  color: #c2b36e;
+}
+.token.entity {
+}
+.token.operator {
+  color: #858585;
+  /* color: #4d9375; */
+}
+.token.url {
+}
+.token.bold {
+}
+.token.important {
+  color: #8ad8d1;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.entity {
+  cursor: help;
+}
+.token.inserted {
+  color: green;
+}
+span.inline-color-wrapper {
+  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9ImdyYXkiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDBoMXYxSDB6TTEgMWgxdjFIMXoiLz48L3N2Zz4=);
+  background-position: center;
+  background-size: 110%;
+  display: inline-block;
+  height: 1.333ch;
+  width: 1.333ch;
+  margin: 0 0.333ch;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  outline: 1px solid rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+span.inline-color {
+  display: block;
+  height: 120%;
+  width: 120%;
+}

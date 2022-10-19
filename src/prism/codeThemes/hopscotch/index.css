@@ -1,0 +1,113 @@
+/*
+ * Modify by Hopscotch
+ * by Jan T. Sott
+ * https://github.com/idleberg/Hopscotch
+ *
+ * This work is licensed under the Creative Commons CC0 1.0 Universal License
+ */
+
+.code-header {
+  background: #322931;
+}
+pre {
+  width: 100%;
+  max-height: 670px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background: #322931;
+  box-sizing: border-box;
+  overflow: auto;
+  margin: 0;
+}
+#code {
+  padding: 10px;
+  padding-top: 0;
+  font-size: 18px !important;
+  font-family: "fira-code";
+  word-break: break-all !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  color: #b9b5b8;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #797379;
+}
+
+.token.punctuation {
+  color: #b9b5b8;
+}
+
+.namespace {
+  opacity: 0.7;
+}
+
+.token.null,
+.token.operator,
+.token.boolean,
+.token.number {
+  color: #fd8b19;
+}
+
+.token.property {
+  color: #fdcc59;
+}
+
+.token.tag {
+  color: #1290bf;
+}
+
+.token.string {
+  color: #149b93;
+}
+
+.token.selector {
+  color: #c85e7c;
+}
+
+.token.attr-name {
+  color: #fd8b19;
+}
+
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #149b93;
+}
+
+.token.attr-value,
+.token.keyword,
+.token.control,
+.token.directive,
+.token.unit {
+  color: #8fc13e;
+}
+
+.token.statement,
+.token.regex,
+.token.atrule {
+  color: #149b93;
+}
+
+.token.placeholder,
+.token.variable {
+  color: #1290bf;
+}
+
+.token.important {
+  color: #dd464c;
+  font-weight: bold;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+pre > code.highlight {
+  outline: 0.4em solid red;
+  outline-offset: 0.4em;
+}

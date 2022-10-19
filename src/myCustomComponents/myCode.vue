@@ -1,18 +1,28 @@
 <script setup lang="ts">
-import { defineProps, toRefs, onMounted, ref, shallowRef, onUpdated } from "vue"
+import { defineProps, toRefs, onMounted, ref, shallowRef, onUpdated, watch } from "vue"
 import "@/prism/prism.js"
-import "@/prism/codeThemes/Pinia/font.css"
-import "@/prism/codeThemes/Pinia/index.css"
+// import "@/prism/codeThemes/Pinia/index.css"
+// import "@/prism/codeThemes/lucario/index.css"
+// import "@/prism/codeThemes/ghcolors/index.css"
+// import "@/prism/codeThemes/hopscotch/index.css"
+// import "@/prism/codeThemes/laserwave/index.css"
+// import "@/prism/codeThemes/duotone-dark/index.css"
+import "@/prism/codeThemes/vitesse-dark/index.css"
 
 const props = defineProps<{
   lang: string
   code: string
+  src: string
 }>()
 
 const pre = shallowRef<HTMLPreElement>()
-const { lang, code } = toRefs(props)
+const { lang, code, src } = toRefs(props)
 let codeContent: string
-const render = () => {
+const render = async () => {
+  if (src.value) {
+    await fetchCode()
+    return
+  }
   codeContent = code.value
   codeContent = codeContent.replaceAll(`亻`, `"`)
   try {
@@ -26,6 +36,16 @@ const render = () => {
   } catch (error) {}
 }
 
+async function fetchCode() {
+  await fetch(src.value).then(res => {
+    console.log(res)
+  })
+  // .then(data => {
+  //   console.log(data)
+  // })
+}
+
+watch(props, render)
 onMounted(render) //初始化
 onUpdated(render) //更新,
 
@@ -42,19 +62,16 @@ const myCode = ref<null | HTMLElement>(null)
 const header = ref<null | HTMLElement>(null)
 let isFullScreen = false
 const fullScreen = () => {
-  myCode.value.classList.toggle("my-code-fullScreen")
-  header.value.classList.toggle("header-fullScreen")
-  pre.value.classList.toggle("pre-fullScreen")
+  myCode!.value!.classList.toggle("my-code-fullScreen")
+  header!.value!.classList.toggle("header-fullScreen")
+  pre!.value!.classList.toggle("pre-fullScreen")
   isFullScreen = !isFullScreen
-  if (isFullScreen) {
-    // window.$msg.success("移动端全屏后,横屏体验更佳哦⚡")
-  }
 }
 </script>
 
 <template>
   <div class="my-code" ref="myCode">
-    <div class="header" ref="header">
+    <div class="code-header" ref="header">
       <div class="icons">
         <div class="circle one"></div>
         <div class="circle two"></div>
@@ -135,19 +152,11 @@ const fullScreen = () => {
   margin-bottom: var(--bottom);
   width: 100%;
   max-height: 700px;
-  // transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  // &:hover {
-  //   // transform: translateY(-4px);
-  //   box-shadow: 0 14px 38px rgb(0 0 0 / 14%), 0 3px 8px rgb(0 0 0 / 12%);
-  // }
-  .header {
+  .code-header {
     position: relative;
     width: 100%;
     height: 30px;
-    // background: rgb(40, 44, 52);
-    // background: #212c42 !important;
-    background: #161f32 !important;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     display: flex;

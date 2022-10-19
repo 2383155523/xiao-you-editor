@@ -81,10 +81,7 @@ export const templates: Templates = [
   },
   {
     template: `
-      <my-tips type="info">
-      <div slot="title">
-      小蝣说:
-      </div>
+      <my-tips type="info" title="小蝣说:">
       tpye的可选值有 info | warn | error | success
   </my-tips>`,
     dark: {

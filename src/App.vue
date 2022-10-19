@@ -7,5 +7,5 @@ import editorTest1 from "@/components/editorTest1.vue"
 </script>
 
 <style lang="scss">
-@import "@/styles/customElement", "@/styles/reset";
+@import "@/styles/reset";
 </style>

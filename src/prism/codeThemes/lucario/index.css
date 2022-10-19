@@ -1,0 +1,105 @@
+/**
+ * Modify by Lucario Theme originally by Raphael Amorim [@raphamorim]
+ * https://github.com/raphamorim/lucario
+ *
+ * Ported for PrismJS by Christopher Kapic [@christopher-kapic]
+ */
+
+.code-header {
+  background: #263e52;
+}
+pre {
+  width: 100%;
+  max-height: 670px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background: #263e52;
+  box-sizing: border-box;
+  overflow: auto;
+  margin: 0;
+}
+#code {
+  padding: 10px;
+  padding-top: 0;
+  font-size: 18px !important;
+  font-family: "fira-code";
+  word-break: break-all !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  color: #f8f8f2;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #5c98cd;
+}
+
+.token.punctuation {
+  color: #f8f8f2;
+}
+
+.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f05e5d;
+}
+
+.token.boolean,
+.token.number {
+  color: #bc94f9;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #fcfcd6;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+  color: #66d8ef;
+}
+
+.token.keyword {
+  color: #6eb26e;
+}
+
+.token.regex,
+.token.important {
+  color: #f05e5d;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}

@@ -5,9 +5,7 @@
 <script setup lang="ts">
 import { defineProps } from "vue"
 import emojis from "@/config/emoji"
-const props = defineProps({
-  name: String,
-})
+defineProps<{ name: string }>()
 </script>
 
 <style lang="scss" scoped>

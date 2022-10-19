@@ -105,6 +105,7 @@ let { type, title } = toRefs(props)
   border-radius: 6px;
   transition: all 0.3s ease 0s, transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s,
     -webkit-transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+  white-space: normal;
 }
 .tips:hover {
   transform: translateY(-5px);

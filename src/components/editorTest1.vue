@@ -6,10 +6,9 @@
       border-radius="15px"
       font-family="HarmonyOS_Sans_SC_Medium"
       :custom-parser="customParser"
-      :styles="styles"
+      :templates="templates"
     />
-    <!-- :templates="templates" -->
-
+    <!-- :styles="styles" -->
     <button @click="changeTheme">changeTheme</button>
   </div>
 </template>
