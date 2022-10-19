@@ -8,12 +8,29 @@
   },
   "private": false,
   "main": "lib/index",
+  "license": "MIT",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
     "release": "node scripts/release.js"
+  },
+  "keywords": [
+    "xiao-you",
+    "editor",
+    "xiao-you-editor",
+    "vue3"
+  ],
+  "homepage": "https://fuyouplus.cn",
+  "repository": {
+    "type": "gitee",
+    "url": "https://gitee.com/fuyouplus/xiao-you-editor"
   },
   "dependencies": {
     "vue": "^3.2.33",

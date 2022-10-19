@@ -7,16 +7,7 @@ export default defineConfig({
     cssCodeSplit: false,
     chunkSizeWarningLimit: 1024,
   },
-  plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          // 将所有包含短横线的标签作为自定义元素处理
-          // isCustomElement: tag => tag.includes("my-"),
-        },
-      },
-    }),
-  ],
+  plugins: [vue()],
   css: {
     preprocessorOptions: {
       scss: {
@@ -26,9 +17,6 @@ export default defineConfig({
   },
   resolve: {
     extensions: [".js", ".ts", ".tsx", ".jsx"],
-    alias: [
-      //配置路径别名
-      { find: "@", replacement: resolve(__dirname, "src") },
-    ],
+    alias: [{ find: "@", replacement: resolve(__dirname, "src") }],
   },
 })
