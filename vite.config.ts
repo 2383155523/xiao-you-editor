@@ -7,6 +7,11 @@ export default defineConfig({
     cssCodeSplit: false,
     chunkSizeWarningLimit: 1024,
   },
+  server: {
+    proxy: {
+      "/release.js": "https://fuyouplus.oss-cn-beijing.aliyuncs.com",
+    },
+  },
   plugins: [vue()],
   css: {
     preprocessorOptions: {

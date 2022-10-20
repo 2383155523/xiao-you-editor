@@ -7,48 +7,57 @@ import "@/prism/prism.js"
 // import "@/prism/codeThemes/hopscotch/index.css"
 // import "@/prism/codeThemes/laserwave/index.css"
 // import "@/prism/codeThemes/duotone-dark/index.css"
-import "@/prism/codeThemes/vitesse-dark/index.css"
+// import "@/prism/codeThemes/vitesse-dark/index.css"
+// import "@/prism/codeThemes/Everblush/index.css"
+import "@/prism/codeThemes/one-dark/index.css"
+// import "@/prism/codeThemes/vsc-dark-plus/index.css"
 
 const props = defineProps<{
-  lang: string
-  code: string
-  src: string
+  lang?: string
+  code?: string
+  src?: string
 }>()
 
 const pre = shallowRef<HTMLPreElement>()
 const { lang, code, src } = toRefs(props)
 let codeContent: string
+
 const render = async () => {
-  if (src.value) {
-    await fetchCode()
-    return
+  if (src!.value) {
+    codeContent = await fetchCode()
+  } else {
+    codeContent = code!.value as string
+    codeContent = codeContent?.replaceAll(`亻`, `"`)
   }
-  codeContent = code.value
-  codeContent = codeContent.replaceAll(`亻`, `"`)
   try {
     const el = pre.value
     const html = Prism.highlight(
       codeContent,
       Prism.languages[lang.value == "vue" ? "html" : lang.value],
-      lang.value == "vue" ? "html" : lang.value
+      lang!.value == "vue" ? "html" : lang!.value
     )
-    el.children[0].innerHTML = html
+    el!.children[0].innerHTML = html
   } catch (error) {}
 }
 
+/**
+ * @Plugin
+ * @Name 渲染远端代码文件
+ */
+
 async function fetchCode() {
-  await fetch(src.value).then(res => {
-    console.log(res)
-  })
-  // .then(data => {
-  //   console.log(data)
-  // })
+  let code = ""
+  await fetch(src!.value as string)
+    .then(res => res.text())
+    .then(data => {
+      code = data
+    })
+  return code
 }
-
-watch(props, render)
-onMounted(render) //初始化
-onUpdated(render) //更新,
-
+/**
+ * @Plugin
+ * @Name 代码复制
+ */
 const copyCode = (e: MouseEvent) => {
   const oInput = document.createElement("textarea")
   oInput.value = codeContent
@@ -61,12 +70,24 @@ const copyCode = (e: MouseEvent) => {
 const myCode = ref<null | HTMLElement>(null)
 const header = ref<null | HTMLElement>(null)
 let isFullScreen = false
+/**
+ * @Plugin
+ * @Name 代码全屏
+ */
 const fullScreen = () => {
   myCode!.value!.classList.toggle("my-code-fullScreen")
   header!.value!.classList.toggle("header-fullScreen")
   pre!.value!.classList.toggle("pre-fullScreen")
   isFullScreen = !isFullScreen
+  if (isFullScreen) {
+    document.body.style.overflow = "hidden"
+  } else {
+    document.body.style.overflow = "scroll"
+  }
 }
+watch(props, render)
+onMounted(render) //初始化
+onUpdated(render) //更新,
 </script>
 
 <template>
@@ -119,7 +140,7 @@ const fullScreen = () => {
     </div>
     <div class="code">
       <pre ref="pre">
-    <div :class="['language-' + lang]" id="code" >
+    <div :class="['language-' + lang]" id="code">
     </div>
 </pre>
     </div>
@@ -153,6 +174,8 @@ const fullScreen = () => {
   width: 100%;
   max-height: 700px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  opacity: 0.85;
+  // backdrop-filter: blur(10px);
   .code-header {
     position: relative;
     width: 100%;
@@ -195,6 +218,7 @@ const fullScreen = () => {
       top: 0;
       display: flex;
       align-items: center;
+
       .copy {
         display: block;
         width: 24px;
@@ -235,7 +259,6 @@ const fullScreen = () => {
     width: 100%;
     max-width: 100%;
     max-height: 670px;
-    // opacity: 0.9;
   }
 }
 

@@ -27,6 +27,7 @@
             @input="handleInput"
             @scroll="editScroll"
             @mouseenter="editMouseEnter"
+            @keydown="keyDown"
           ></textarea>
           <div class="placeholder" v-show="placeholderIsShow">
             {{ style[theme].placeholder.content }}
@@ -229,6 +230,16 @@ const nativeEditValue = computed(() => (props.modelValue ? String(props.modelVal
  * @Methods
  */
 
+const keyDown = (e: KeyboardEvent) => {
+  if (e.code == "Tab") {
+    insertEdit(" ".repeat(4))
+
+    e.preventDefault()
+    e.returnValue = false
+    return false
+  }
+}
+
 const addTemplate = (template: string) => {
   insertEdit(template)
 }
@@ -284,42 +295,51 @@ const previewMouseEnter = () => {
 }
 
 const insertEdit = (str: string) => {
-  if (document.selection) {
-    edit!.value!.focus()
-    const sel: any = document.selection.createRange()
-    sel.text = str
-    sel.select()
-  }
-  //火狐/网景 浏览器
-  // || edit!.value!.selectionStart == "0"
-  else if (edit!.value!.selectionStart) {
-    //得到光标前的位置
-    let startPos = edit!.value!.selectionStart
-    //得到光标后的位置
-    let endPos = edit!.value!.selectionEnd
-    // 在加入数据之前获得滚动条的高度
-    let restoreTop = edit!.value!.scrollTop
-
-    let value =
-      modelValue.value.substring(0, startPos) +
-      str +
-      modelValue.value.substring(endPos, modelValue.value.length)
-    // console.log("value1", modelValue.value)
-    emit("update:modelValue", value)
-    //如果滚动条高度大于0
-    if (restoreTop > 0) {
-      // 返回
-      edit!.value!.scrollTop = restoreTop
-    }
-    edit!.value!.focus()
-    edit!.value!.selectionStart = startPos + str.length
-    edit!.value!.selectionEnd = startPos + str.length
-  } else {
-    let value = modelValue.value + str
-    emit("update:modelValue", value)
-
-    edit!.value!.focus()
-  }
+  const cursorStartPosition = edit!.value!.selectionStart
+  const beforeContent = modelValue.value.substring(0, cursorStartPosition)
+  const afterContent = modelValue.value.substring(cursorStartPosition)
+  emit("update:modelValue", `${beforeContent}${str}${afterContent}`)
+  const timer = setTimeout(() => {
+    edit!.value!.setSelectionRange(
+      cursorStartPosition + str.length,
+      cursorStartPosition + str.length
+    )
+    clearTimeout(timer)
+  }, 0)
+  // if (document.selection) {
+  //   edit!.value!.focus()
+  //   const sel: any = document.selection.createRange()
+  //   sel.text = str
+  //   sel.select()
+  // }
+  // //火狐/网景 浏览器
+  // // || edit!.value!.selectionStart == "0"
+  // else if (edit!.value!.selectionStart) {
+  //   //得到光标前的位置
+  //   let startPos = edit!.value!.selectionStart
+  //   //得到光标后的位置
+  //   let endPos = edit!.value!.selectionEnd
+  //   // 在加入数据之前获得滚动条的高度
+  //   let restoreTop = edit!.value!.scrollTop
+  //   let value =
+  //     modelValue.value.substring(0, startPos) +
+  //     str +
+  //     modelValue.value.substring(endPos, modelValue.value.length)
+  //   // console.log("value1", modelValue.value)
+  //   emit("update:modelValue", value)
+  //   //如果滚动条高度大于0
+  //   if (restoreTop > 0) {
+  //     // 返回
+  //     edit!.value!.scrollTop = restoreTop
+  //   }
+  //   edit!.value!.focus()
+  //   edit!.value!.selectionStart = startPos + str.length
+  //   edit!.value!.selectionEnd = startPos + str.length
+  // } else {
+  //   let value = modelValue.value + str
+  //   emit("update:modelValue", value)
+  //   edit!.value!.focus()
+  // }
 }
 
 /**

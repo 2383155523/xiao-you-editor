@@ -13,7 +13,7 @@ const { src } = toRefs(props)
 
 const player = shallowRef<HTMLVideoElement>()
 
-let instance = null
+let instance: any = null
 let index = 0
 
 const unMount = () => {
@@ -22,7 +22,7 @@ const unMount = () => {
   }
 }
 const init = () => {
-  instance = new Plyr(player.value, {
+  instance = new Plyr(player.value as HTMLElement, {
     i18n,
     tooltips: {
       controls: true,
@@ -47,14 +47,14 @@ const init = () => {
       "fullscreen",
     ],
   })
-  bus.state.plyrIndex = bus.state.plyrIndex + 1
-  index = bus.state.plyrIndex
-  bus.state.plyrInstanceArr.push({
+  bus!.state!.plyrIndex = bus!.state!.plyrIndex + 1
+  index = bus!.state!.plyrIndex
+  bus!.state!.plyrInstanceArr.push({
     index: index,
     instance: instance,
   })
   instance.on("playing", () => {
-    bus.state.plyrInstanceArr.forEach(item => {
+    bus!.state!.plyrInstanceArr.forEach(item => {
       if (item.index != index) {
         item.instance.pause()
       }
