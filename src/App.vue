@@ -19,7 +19,6 @@ import changeTheme from "@/components/changeTheme/index.vue"
 
 body {
   background-color: var(--BodyColor);
-  color: var(--TextColor);
   transition: all 0.4s var(--n-bezier);
   font-family: "HarmonyOS_Sans_SC_Medium";
   font-size: 16px;
@@ -47,6 +46,7 @@ body {
     justify-content: center;
     font-size: 20px;
     user-select: none;
+    color: var(--TextColor);
   }
   main {
     width: 100%;

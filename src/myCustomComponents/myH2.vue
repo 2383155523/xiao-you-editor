@@ -43,8 +43,8 @@ defineProps<{
   font-size: 20px;
   display: flex;
   align-items: center;
-  color: #fff;
-  transition: color 0.3s linear;
+  color: var(--TextColor);
+  transition: all 0.4s var(--n-bezier);
   font-weight: bold;
   margin-bottom: var(--bottom);
   justify-content: v-bind("center ? 'center' : '' ");
@@ -58,8 +58,8 @@ defineProps<{
     width: 23px;
     height: 23px;
     margin-right: 5px;
-    fill: #fff;
-    transition: color 0.3s linear;
+    fill: var(--TextColor);
+    transition: all 0.4s var(--n-bezier);
   }
 }
 </style>

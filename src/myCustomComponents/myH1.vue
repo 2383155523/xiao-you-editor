@@ -27,8 +27,8 @@ defineProps<{ center?: boolean }>()
   font-size: 23px;
   display: flex;
   align-items: center;
-  color: #fff;
-  transition: color 0.3s linear;
+  color: var(--TextColor);
+  transition: all 0.4s var(--n-bezier);
   font-weight: bolder;
   margin-bottom: var(--bottom);
   justify-content: v-bind("center ? 'center': '' ");
@@ -42,8 +42,8 @@ defineProps<{ center?: boolean }>()
     width: 25px;
     height: 25px;
     margin-right: 5px;
-    fill: #fff;
-    transition: color 0.3s linear;
+    fill: var(--TextColor);
+    transition: all 0.4s var(--n-bezier);
   }
 }
 </style>

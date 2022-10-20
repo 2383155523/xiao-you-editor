@@ -26,7 +26,7 @@ const link = () => {
 <style lang="scss" scoped>
 .my-a {
   display: inline-block !important;
-  transition: color 0.5s linear;
+  transition: all 0.4s var(--n-bezier);
   position: relative;
   cursor: pointer;
   text-indent: 0 !important;
@@ -43,7 +43,7 @@ const link = () => {
 .my-a .line {
   width: 0%;
   height: 2px;
-  transition: width 0.3s linear;
+  transition: all 0.4s var(--n-bezier);
   position: absolute;
   bottom: 0;
   left: 0;

@@ -28,7 +28,7 @@ const { width, height } = toRefs(props)
   border-radius: 4px;
   border-bottom: 1px solid var(--tableBorderColor);
   border: 2px solid var(--borderColor);
-  transition: all 0.3s var(--n-bezier);
+  transition: all 0.4s var(--n-bezier);
   margin-bottom: var(--bottom);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   white-space: nowrap !important;
@@ -41,7 +41,7 @@ const { width, height } = toRefs(props)
     background: var(--tableHoverBg);
     // background-color: red;
     color: var(--TextColor);
-    transition: all 0.3s var(--n-bezier);
+    transition: all 0.4s var(--n-bezier);
     position: fixed;
     border-bottom: 1px solid var(--tableBorderColor);
     box-sizing: border-box;
@@ -68,7 +68,7 @@ const { width, height } = toRefs(props)
       align-items: center;
       background: var(--BlockBgColor);
       color: var(--TextColor);
-      transition: all 0.3s var(--n-bezier);
+      transition: all 0.4s var(--n-bezier);
       border-bottom: 1px solid var(--tableBorderColor);
       box-sizing: border-box;
       .tr-td {

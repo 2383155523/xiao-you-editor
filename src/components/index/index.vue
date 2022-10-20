@@ -81,14 +81,25 @@ console.log(toSum(1,2))
       </div>
       </my-table>
 
-<my-tabs tabs="Release|Video">
+<my-tabs tabs="Release|Video|Music">
   
       <div class="tab-item">
-        <my-code lang="js" src="/release.js"></my-code>
+~~~js
+const str = "string"
+const number = 20
+
+function toSum (a,b){
+  return a + b;
+}
+console.log(toSum(1,2))
+~~~
       </div>
 
       <div class="tab-item">
       <my-video src="https://fuyouplus.oss-cn-beijing.aliyuncs.com/video/zuozhu.mp4"></my-video>
+      </div>
+      <div class="tab-item">
+    <my-music id="1899705498"></my-music>
       </div>
   
     </my-tabs>
@@ -111,9 +122,7 @@ const customParser = [
     const reg =
       / {0,3}\n*(`{3,}(?=[^`\n]*\n)|~{3,})([^\n]*)\n(?:|([\s\S]*?)\n)(?: {0,3}\1[~`]* *(?=\n|$)|$)/g
     if (reg.test(template)) {
-      console.log("code")
       templateReplaceContent = template.replace(reg, (...arg) => {
-        console.log(arg)
         const lang = arg[2].trim()
         let code = arg[3] ?? ""
         if (code) {

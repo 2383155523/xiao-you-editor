@@ -139,7 +139,15 @@ console.log(toSum(1,2))
     template: `<my-tabs tabs="Release|Video">
   
       <div class="tab-item">
-        <my-code lang="js" src="/release.js"></my-code>
+~~~js
+const str = "string"
+const number = 20
+      
+function toSum (a,b){
+  return a + b;
+ }
+ console.log(toSum(1,2))
+~~~
       </div>
 
       <div class="tab-item">

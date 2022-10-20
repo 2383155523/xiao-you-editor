@@ -80,7 +80,7 @@ onUpdated(init)
   border-radius: 4px;
   box-sizing: border-box;
   position: relative;
-  transition: all 0.3s var(--n-bezier);
+  transition: all 0.4s var(--n-bezier);
   border: 1px solid var(--tableBorderColor);
   .tab-navs {
     width: 100%;
@@ -93,7 +93,7 @@ onUpdated(init)
       color: var(--tabsItemColor);
       text-align: center;
       cursor: pointer;
-      transition: all 0.3s var(--n-bezier);
+      transition: all 0.4s var(--n-bezier);
       border-radius: 4px;
       span {
         position: relative;
@@ -111,7 +111,7 @@ onUpdated(init)
       background: var(--tabItemActive);
       z-index: 0;
       border-radius: 3px;
-      transition: all 0.3s var(--n-bezier);
+      transition: all 0.4s var(--n-bezier);
     }
   }
   .content-box {
@@ -121,12 +121,12 @@ onUpdated(init)
     background: var(--tabItemActive);
     overflow: hidden;
     overflow-y: auto;
-    transition: all 0.3s var(--n-bezier);
+    transition: all 0.4s var(--n-bezier);
     .swiper-content {
       border-radius: 4px;
       white-space: nowrap;
       width: 100%;
-      transition: all 0.3s var(--n-bezier);
+      transition: all 0.4s var(--n-bezier);
       position: relative;
       left: 0;
       top: 0;
