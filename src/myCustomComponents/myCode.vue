@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, toRefs, onMounted, ref, shallowRef, onUpdated, watch } from "vue"
+import { defineProps, toRefs, onMounted, ref, shallowRef, onUpdated } from "vue"
 import "@/prism/prism.js"
 // import "@/prism/codeThemes/Pinia/index.css"
 // import "@/prism/codeThemes/lucario/index.css"
@@ -33,7 +33,7 @@ const render = async () => {
     const el = pre.value
     const html = Prism.highlight(
       codeContent,
-      Prism.languages[lang.value == "vue" ? "html" : lang.value],
+      Prism.languages[lang.value == "vue" ? "html" : lang!.value],
       lang!.value == "vue" ? "html" : lang!.value
     )
     el!.children[0].innerHTML = html
@@ -85,7 +85,6 @@ const fullScreen = () => {
     document.body.style.overflow = "scroll"
   }
 }
-watch(props, render)
 onMounted(render) //初始化
 onUpdated(render) //更新,
 </script>

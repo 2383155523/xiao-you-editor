@@ -40,10 +40,13 @@ export const templates: Templates = [
   },
   {
     template: `~~~js
-      const a = 20;
-      function fn (){
-          return a;
-      }
+const str = "string"
+const number = 20
+
+function toSum (a,b){
+  return a + b;
+}
+console.log(toSum(1,2))
   ~~~
   `,
     dark: {
@@ -133,14 +136,14 @@ export const templates: Templates = [
     light: {},
   },
   {
-    template: `<my-tabs tabs="JavaScript|TypeScript">
+    template: `<my-tabs tabs="Release|Video">
   
       <div class="tab-item">
-        <my-code lang="js" top="0px" bottom="0px"> const a = 20; function fn (){ return a; } </my-code>
+        <my-code lang="js" src="/release.js"></my-code>
       </div>
-  
+
       <div class="tab-item">
-        <my-code lang="ts" top="0px" bottom="0px"> const a = 20; function fn (){ return a; } </my-code>
+      <my-video src="https://fuyouplus.oss-cn-beijing.aliyuncs.com/video/zuozhu.mp4"></my-video>
       </div>
   
     </my-tabs>`,
