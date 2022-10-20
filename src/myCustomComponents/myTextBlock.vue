@@ -14,37 +14,33 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, toRefs, ref, onMounted, nextTick } from "vue"
+import { defineProps, toRefs, onMounted, nextTick, shallowRef } from "vue"
 import bus from "@/eventBus"
-const text_block = ref<null | HTMLElement>(null)
-const text_block_header = ref<null | HTMLElement>(null)
+const text_block = shallowRef<HTMLElement>()
+const text_block_header = shallowRef<HTMLElement>()
+
 onMounted(() => {
   bus.on("theme", data => {
     nextTick(() => {
       try {
         if (data == "light") {
-          text_block.value.classList.remove(`text-block-dark`)
-          text_block.value.classList.add(`text-block-light`)
-          text_block_header.value.style.background = "var(--linear-gradient)"
+          text_block!.value!.classList.remove(`text-block-dark`)
+          text_block!.value!.classList.add(`text-block-light`)
+          text_block_header!.value!.style.background = "var(--linear-gradient)"
         } else {
-          text_block.value.classList.remove(`text-block-light`)
-          text_block.value.classList.add(`text-block-dark`)
-          text_block_header.value.style.background = "rgba(27, 30, 43, 0.9)"
+          text_block!.value!.classList.remove(`text-block-light`)
+          text_block!.value!.classList.add(`text-block-dark`)
+          text_block_header!.value!.style.background = "rgba(27, 30, 43, 0.9)"
         }
       } catch (error) {}
     })
   })
 })
 
-interface props {
+const props = defineProps<{
   color?: string
   title?: string
-}
-
-const props: props = defineProps({
-  color: String,
-  title: String,
-})
+}>()
 
 let { color, title } = toRefs(props)
 </script>

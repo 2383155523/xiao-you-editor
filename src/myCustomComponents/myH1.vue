@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue"
-defineProps<{ center: boolean }>()
+defineProps<{ center?: boolean }>()
 </script>
 
 <style lang="scss" scoped>

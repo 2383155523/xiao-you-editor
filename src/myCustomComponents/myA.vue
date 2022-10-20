@@ -2,17 +2,17 @@
 import { defineProps, toRefs } from "vue"
 
 const props = defineProps<{
-  color: string
-  href: string
-  line: boolean
-  size: string | number
-  weight: string | number
+  color?: string
+  href?: string
+  line?: boolean
+  size?: string | number
+  weight?: string | number
 }>()
 
 const { weight, size, color, href, line } = toRefs(props)
 
 const link = () => {
-  href.value && window.open(href.value)
+  href!.value && window.open(href!.value)
 }
 </script>
 

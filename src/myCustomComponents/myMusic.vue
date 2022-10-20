@@ -15,12 +15,12 @@ const props = defineProps<{
 }>()
 
 const { id, src, name, author, img, lrc } = toRefs(props)
-let instance = null
+let instance: unknown = null
 
 const init = () => {
   unMount()
   const theme = getComputedStyle(document.documentElement).getPropertyValue("--themeColor")
-  if (src.value) {
+  if (src!.value) {
     //自给模式
     instance = new APlayer({
       container: aplayer.value,
@@ -29,18 +29,18 @@ const init = () => {
       lrcType: 3,
       audio: [
         {
-          name: name.value,
-          url: src.value,
-          artist: author.value,
-          cover: img.value,
-          lrc: lrc.value,
+          name: name!.value,
+          url: src!.value,
+          artist: author!.value,
+          cover: img!.value,
+          lrc: lrc!.value,
         },
       ],
     })
   } else {
     //网易云模式
     const url = `https://api.i-meto.com/meting/api?server=netease&type=song&id=${
-      id.value
+      id!.value
     }&r=${Math.random()}`
     fetch(url)
       .then(res => res.json())

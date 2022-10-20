@@ -10,16 +10,10 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, toRefs, computed } from "vue"
-import type { PropType } from "vue"
-
-interface props {
-  type?: string
-  title?: string
-}
+import { defineProps, toRefs, computed, withDefaults } from "vue"
 
 const replaceTypeText = computed(() => {
-  return (type: string) => {
+  return (type: "info" | "warn" | "error" | "success" | "primary") => {
     switch (type) {
       case "info":
         return "提示:"
@@ -34,13 +28,15 @@ const replaceTypeText = computed(() => {
     }
   }
 })
-const props = defineProps({
-  type: {
-    type: String as PropType<"info" | "warn" | "error" | "success" | "primary">,
-    default: "primary",
-  },
-  title: String,
-})
+const props = withDefaults(
+  defineProps<{
+    type?: "info" | "warn" | "error" | "success" | "primary"
+    title?: string
+  }>(),
+  {
+    type: "primary",
+  }
+)
 let { type, title } = toRefs(props)
 </script>
 

@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { defineProps, withDefaults } from "vue"
-withDefaults(defineProps<{ color: string }>(), {
+withDefaults(defineProps<{ color?: string }>(), {
   color: "red",
 })
 </script>

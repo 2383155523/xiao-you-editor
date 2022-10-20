@@ -1,19 +1,14 @@
 import { createRouter, createWebHashHistory } from "vue-router"
-
 import type { RouteRecordRaw } from "vue-router"
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "/editor-custom",
+    redirect: "/index",
   },
   {
-    path: "/editor-custom",
-    component: () => import("../components/editorTest1.vue"),
-  },
-  {
-    path: "/editor-markdown",
-    component: () => import("../components/edit-markdown.vue"),
+    path: "/index",
+    component: () => import("../components/index/index.vue"),
   },
 ]
 

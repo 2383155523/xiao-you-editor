@@ -15,7 +15,7 @@
 </template>
 <script setup lang="ts">
 import { defineProps, withDefaults } from "vue"
-withDefaults(defineProps<{ src: string; h: string }>(), { h: "500px" })
+withDefaults(defineProps<{ src: string; h?: string }>(), { h: "500px" })
 </script>
 
 <style scoped>

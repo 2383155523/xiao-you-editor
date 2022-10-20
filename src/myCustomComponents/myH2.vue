@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { defineProps } from "vue"
 defineProps<{
-  center: boolean
+  center?: boolean
 }>()
 </script>
 

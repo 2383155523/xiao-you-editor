@@ -1,15 +1,8 @@
 <template>
-  <div class="my-p" :style="css">
+  <div class="my-p">
     <slot></slot>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps } from "vue"
-const props = defineProps({
-  css: Object,
-})
-</script>
 
 <style lang="scss" scoped>
 .my-p {

@@ -5,17 +5,17 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, toRefs } from "vue"
-const props = defineProps({
-  width: {
-    type: String,
-    default: "100%",
-  },
-  height: {
-    type: String,
-    default: "200px",
-  },
-})
+import { defineProps, toRefs, withDefaults } from "vue"
+const props = withDefaults(
+  defineProps<{
+    width?: string
+    height?: string
+  }>(),
+  {
+    width: "100%",
+    height: "200px",
+  }
+)
 const { width, height } = toRefs(props)
 </script>
 

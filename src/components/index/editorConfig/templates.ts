@@ -1,4 +1,4 @@
-import type { Templates } from "../../../lib/index.d"
+import type { Templates } from "../../../../lib/index.d"
 
 export const templates: Templates = [
   {

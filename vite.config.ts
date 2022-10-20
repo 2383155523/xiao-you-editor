@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue"
 const { resolve } = require("path")
 
 export default defineConfig({
+  base: "/xiao-you-editor/", //production Mode
   build: {
     cssCodeSplit: false,
     chunkSizeWarningLimit: 1024,

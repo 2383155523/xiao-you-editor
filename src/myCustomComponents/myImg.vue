@@ -11,14 +11,8 @@
 
 <script setup lang="ts">
 import { defineProps, ref } from "vue"
-interface props {
-  src?: string
-  alt?: string
-}
-const props: props = defineProps({
-  src: String,
-  alt: String,
-})
+
+defineProps<{ src: string; alt?: string }>()
 const isLoaded = ref<boolean>(false)
 const imgLoad = () => {
   setTimeout(() => {

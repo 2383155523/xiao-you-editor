@@ -8,8 +8,8 @@ import "@/prism/prism.js"
 // import "@/prism/codeThemes/laserwave/index.css"
 // import "@/prism/codeThemes/duotone-dark/index.css"
 // import "@/prism/codeThemes/vitesse-dark/index.css"
-// import "@/prism/codeThemes/Everblush/index.css"
-import "@/prism/codeThemes/one-dark/index.css"
+import "@/prism/codeThemes/Everblush/index.css"
+// import "@/prism/codeThemes/one-dark/index.css"
 // import "@/prism/codeThemes/vsc-dark-plus/index.css"
 
 const props = defineProps<{

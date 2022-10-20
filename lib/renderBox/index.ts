@@ -48,7 +48,6 @@ export const renderBox = defineComponent({
           this!.customParser!.forEach((render: (template: string) => string) => {
             templateCache = render(templateCache)
           })
-          console.log("templateCache=", templateCache)
           this.parseTemplateContent = templateCache
         }
       },

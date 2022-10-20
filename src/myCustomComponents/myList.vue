@@ -9,11 +9,12 @@
 
 <script setup lang="ts">
 import { defineProps, toRefs } from "vue"
-import type { PropType } from "vue"
-const props = defineProps({
-  ol: Boolean,
-  type: String as PropType<"1" | "A" | "a" | "I" | "i">,
-})
+
+const props = defineProps<{
+  ol?: boolean
+  type?: "1" | "A" | "a" | "I" | "i"
+}>()
+
 const { type, ol } = toRefs(props)
 </script>
 
@@ -23,5 +24,6 @@ const { type, ol } = toRefs(props)
   padding-left: 80px;
   font-size: 16px;
   margin-bottom: var(--bottom);
+  white-space: nowrap !important;
 }
 </style>

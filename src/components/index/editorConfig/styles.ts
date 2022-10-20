@@ -1,4 +1,4 @@
-import type { Styles } from "../../../lib/index.d"
+import type { Styles } from "../../../../lib/index.d"
 import bizhi2 from "@/assets/bizhi2.jpg"
 import bizhi from "@/assets/bizhi.jpg"
 
