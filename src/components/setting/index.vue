@@ -5,18 +5,7 @@ import settingDark from "@/assets/setting-dark.svg"
 import sun from "@/assets/sun.svg"
 import moon from "@/assets/moon.svg"
 import bus from "@/eventBus/index"
-import {
-  NDrawer,
-  NDrawerContent,
-  NDivider,
-  NColorPicker,
-  NSwitch,
-  NSelect,
-  NButton,
-  useMessage,
-  useDialog,
-  NInput,
-} from "naive-ui"
+import { NDrawer, NDrawerContent, NDivider, NColorPicker, NSwitch, NInput } from "naive-ui"
 import { setting } from "../index/editorConfig/setting"
 const settingIsShow = ref<boolean>(false)
 bus.on("theme", (v: "light" | "dark") => {
