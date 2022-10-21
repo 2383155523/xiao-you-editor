@@ -1,17 +1,27 @@
 <template>
-  <div class="root">
-    <header>
-      <div class="name">Xiao You Editor Playground</div>
-      <changeTheme />
-    </header>
-    <main>
-      <router-view></router-view>
-    </main>
-  </div>
+  <NConfigProvider :locale="zhCN" :theme="ProjectSetting.theme == 'light' ? lightTheme : darkTheme">
+    <div class="root">
+      <header>
+        <div class="name">Xiao You Editor Playground</div>
+        <setting />
+        <changeTheme />
+      </header>
+      <main>
+        <router-view></router-view>
+      </main>
+    </div>
+  </NConfigProvider>
 </template>
 
 <script setup lang="ts">
 import changeTheme from "@/components/changeTheme/index.vue"
+import setting from "@/components/setting/index.vue"
+import bus from "@/eventBus"
+import { NConfigProvider, darkTheme, lightTheme, zhCN } from "naive-ui"
+import { setting as ProjectSetting } from "./components/index/editorConfig/setting"
+bus.on("theme", (v: "light" | "dark") => {
+  ProjectSetting.theme = v
+})
 </script>
 
 <style lang="scss">

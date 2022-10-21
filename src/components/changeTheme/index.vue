@@ -1,26 +1,25 @@
 <script lang="ts" setup>
-import { ref } from "vue"
 import bus from "@/eventBus/index"
 import sun from "@/assets/sun.svg"
 import moon from "@/assets/moon.svg"
-const theme = ref<string>("dark")
+import { setting } from "../index/editorConfig/setting"
 
 function changeTheme() {
   const html = document.querySelector("html") as HTMLHtmlElement
-  if (theme.value == "dark") {
+  if (setting.theme == "dark") {
     html.className = "light"
-    theme.value = "light"
+    setting.theme = "light"
   } else {
     html.className = "dark"
-    theme.value = "dark"
+    setting.theme = "dark"
   }
-  bus.commit("theme", theme.value)
+  bus.commit("theme", setting.theme)
 }
 </script>
 
 <template>
   <div class="changeTheme" @click="changeTheme">
-    <img :src="theme == 'dark' ? sun : moon" alt="" class="icon" />
+    <img :src="setting.theme == 'dark' ? sun : moon" alt="" class="icon" />
   </div>
 </template>
 
@@ -28,7 +27,7 @@ function changeTheme() {
 .changeTheme {
   position: absolute;
   top: 50%;
-  right: 30px;
+  right: 100px;
   transform: translateY(-50%);
   user-select: none;
   .icon {
