@@ -81,12 +81,10 @@ async function commitChanges(targetVersion) {
 
 async function pushToGithub(version) {
   step("\nPushing commit to Github...")
-  await run("git", ["tag", `v${version}`])
   await run("git", ["push", "github", `master`])
 }
 async function pushToGitee(version) {
   step("\nPushing commit to Gitee...")
-  await run("git", ["tag", `v${version}`])
   await run("git", ["push", "gitee", `master`])
 }
 async function publishPackagesToNpm(version) {
