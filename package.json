@@ -1,7 +1,7 @@
 {
   "name": "xiao-you-editor",
-  "version": "0.0.1",
-  "description": "基于vue3的一个内容编辑器",
+  "version": "0.0.2",
+  "description": "基于vue3的一个内容编辑器插件",
   "author": {
     "name": "微若蜉蝣",
     "email": "2383155523@qq.com"
