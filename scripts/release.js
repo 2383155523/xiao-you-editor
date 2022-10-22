@@ -17,7 +17,7 @@ async function main() {
   await publishPackagesToNpm(targetVersion).catch(error => {
     throw error
   })
-  await pushToGithub()
+  // await pushToGithub()
   await pushToGitee()
 }
 

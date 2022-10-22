@@ -3,6 +3,7 @@ src/
 public/
 node_modules/
 scripts/
+dist/
  
 # 忽略指定文件
 tsconfig.vite-config.json
