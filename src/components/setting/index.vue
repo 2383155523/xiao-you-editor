@@ -16,6 +16,7 @@ import {
 } from "naive-ui"
 import { setting } from "../index/editorConfig/setting"
 import { content } from "../index/editorConfig/defaultContent"
+import type { Theme } from "xiao-you-editor"
 const settingIsShow = ref<boolean>(false)
 const templateHeaderIsShow = ref<boolean>(Boolean(setting.templates.length))
 const theme = toRef(setting, "theme")
@@ -30,7 +31,7 @@ watch(templateHeaderIsShow, (v: boolean) => {
   }
 })
 
-watch(theme, (v: "light" | "dark") => {
+watch(theme, (v: Theme) => {
   const html = document.querySelector("html") as HTMLHtmlElement
   if (v == "dark") {
     html.className = "dark"

@@ -60,6 +60,6 @@
     "vue-router": "^4.0.16",
     "vue-tsc": "^0.34.7",
     "xiao-you-bus": "^1.0.3",
-    "xiao-you-editor": "^0.1.0"
+    "xiao-you-editor": "^0.1.1"
   }
 }

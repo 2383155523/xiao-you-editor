@@ -9,7 +9,7 @@ import type {
   FontFamily,
   Theme,
   Templates,
-} from "xiao-you-editor/lib/index"
+} from "xiao-you-editor"
 
 export const setting = reactive<{
   styles: Styles
