@@ -233,7 +233,6 @@ const nativeEditValue = computed(() => (props.modelValue ? String(props.modelVal
 const keyDown = (e: KeyboardEvent) => {
   if (e.code == "Tab") {
     insertEdit(" ".repeat(4))
-
     e.preventDefault()
     e.returnValue = false
     return false
@@ -373,7 +372,8 @@ onMounted(() => {
 .editContainer {
   width: 100%;
   height: 100%;
-  background-image: v-bind("style[theme].background.url");
+
+  background-image: v-bind("'url('+ style[theme].background.url +')'");
   background-color: v-bind("style[theme].background.color");
   background-size: v-bind("style[theme].background.size");
   background-repeat: v-bind("style[theme].background.repeat");
@@ -432,6 +432,8 @@ onMounted(() => {
   border-bottom-left-radius: v-bind("borderRadius");
   border: none;
   font-size: v-bind("style[theme].font.size");
+  font-family: v-bind("fontFamily");
+  font-weight: v-bind("style[theme].font.weight");
   padding: 10px;
   box-sizing: border-box;
   resize: none;
@@ -446,7 +448,6 @@ onMounted(() => {
   overflow-wrap: break-word;
   background: transparent;
   transition: v-bind("transitionMode");
-  font-family: v-bind("fontFamily");
 }
 
 .previewBox {
@@ -467,6 +468,8 @@ onMounted(() => {
   overflow-wrap: break-word;
   border-left: none;
   background: transparent;
+  font-size: v-bind("style[theme].font.size");
+  font-weight: v-bind("style[theme].font.weight");
   color: v-bind("style[theme].font.color");
   transition: v-bind("transitionMode");
   font-family: v-bind("fontFamily");

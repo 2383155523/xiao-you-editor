@@ -7,7 +7,7 @@
 .code-header {
   background: #27212e;
 }
-pre {
+.code pre {
   width: 100%;
   max-height: 670px;
   border-bottom-left-radius: 4px;

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import bus from "@/eventBus/index"
 import sun from "@/assets/sun.svg"
 import moon from "@/assets/moon.svg"
 import { setting } from "../index/editorConfig/setting"
@@ -13,7 +12,6 @@ function changeTheme() {
     html.className = "dark"
     setting.theme = "dark"
   }
-  bus.commit("theme", setting.theme)
 }
 </script>
 

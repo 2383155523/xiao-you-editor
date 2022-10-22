@@ -64,7 +64,11 @@ const init = () => {
 }
 
 nextTick(() => {
-  const resizeObserver = new ResizeObserver(init)
+  const resizeObserver = new ResizeObserver(() => {
+    try {
+      init()
+    } catch (error) {}
+  })
   resizeObserver.observe(myTabs.value as HTMLElement)
 })
 onMounted(init)

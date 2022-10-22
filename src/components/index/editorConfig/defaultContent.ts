@@ -1,3 +1,4 @@
+import { ref } from "vue"
 export const defaultContent = `<my-h1>一级标题</my-h1>
 
 <my-h2>二级标题</my-h2>
@@ -83,3 +84,5 @@ console.log(toSum(1,2))
     </my-tabs>
 
 <my-iframe src="https://fuyouplus.cn/" h="900px"></my-iframe>`
+
+export const content = ref<string>(defaultContent)

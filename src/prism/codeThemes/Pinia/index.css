@@ -4,7 +4,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
 .code-header {
   background: #161f32;
 }
-pre {
+.code pre {
   width: 100%;
   max-height: 670px;
   border-bottom-left-radius: 4px;

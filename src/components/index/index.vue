@@ -8,23 +8,14 @@
       :transitionMode="setting.transitionMode"
       :styles="setting.styles"
       :custom-parser="customParser"
-      :templates="templates"
+      :templates="setting.templates"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from "vue"
-import { templates } from "./editorConfig/templates"
-import { defaultContent } from "./editorConfig/defaultContent"
+import { content } from "./editorConfig/defaultContent"
 import { setting } from "./editorConfig/setting"
-import bus from "@/eventBus/index"
-
-//编辑内容的双向绑定
-const content = ref<string>(defaultContent)
-watchEffect(() => {
-  console.log(content.value)
-})
 
 //自定义解析器
 const customParser = [

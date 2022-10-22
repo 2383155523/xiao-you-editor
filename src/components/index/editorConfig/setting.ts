@@ -1,10 +1,14 @@
 import { reactive } from "vue"
+import bizhi2 from "@/assets/bizhi2.jpg"
+import bizhi from "@/assets/bizhi.jpg"
+import { templates } from "./templates"
 import type {
   Styles,
   BorderRadius,
   TransitionMode,
   FontFamily,
   Theme,
+  Templates,
 } from "../../../../lib/index.d"
 export const setting = reactive<{
   styles: Styles
@@ -12,7 +16,9 @@ export const setting = reactive<{
   transitionMode: TransitionMode
   fontFamily: FontFamily
   theme: Theme
+  templates: Templates
 }>({
+  templates: templates,
   theme: "dark",
   fontFamily: "fira-code",
   transitionMode: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
