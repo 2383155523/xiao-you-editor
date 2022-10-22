@@ -1,6 +1,6 @@
 {
   "name": "xiao-you-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "基于vue3的一个内容编辑器插件",
   "author": {
     "name": "微若蜉蝣",
@@ -9,6 +9,13 @@
   "private": false,
   "main": "lib/index",
   "license": "MIT",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "browserslist": [
     "> 1%",
     "last 2 versions",
@@ -52,6 +59,7 @@
     "vite": "^2.9.5",
     "vue-router": "^4.0.16",
     "vue-tsc": "^0.34.7",
-    "xiao-you-bus": "^1.0.3"
+    "xiao-you-bus": "^1.0.3",
+    "xiao-you-editor": "^0.1.0"
   }
 }

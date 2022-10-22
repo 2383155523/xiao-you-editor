@@ -17,6 +17,7 @@ specifiers:
   vue-router: ^4.0.16
   vue-tsc: ^0.34.7
   xiao-you-bus: ^1.0.3
+  xiao-you-editor: ^0.1.0
   xiao-you-transform-v3: ^1.0.5
 
 dependencies:
@@ -39,6 +40,7 @@ devDependencies:
   vue-router: 4.1.5_vue@3.2.41
   vue-tsc: 0.34.17_typescript@4.6.4
   xiao-you-bus: 1.0.3
+  xiao-you-editor: 0.1.0
 
 packages:
 
@@ -196,7 +198,6 @@ packages:
     dependencies:
       '@vue/reactivity': 3.2.41
       '@vue/shared': 3.2.41
-    dev: false
 
   /@vue/runtime-dom/3.2.41:
     resolution: {integrity: sha512-U7zYuR1NVIP8BL6jmOqmapRAHovEFp7CSw4pR2FacqewXNGqZaRfHoNLQsqQvVQ8yuZNZtxSZy0FFyC70YXPpA==}
@@ -204,7 +205,6 @@ packages:
       '@vue/runtime-core': 3.2.41
       '@vue/shared': 3.2.41
       csstype: 2.6.21
-    dev: false
 
   /@vue/server-renderer/3.2.41_vue@3.2.41:
     resolution: {integrity: sha512-7YHLkfJdTlsZTV0ae5sPwl9Gn/EGr2hrlbcS/8naXm2CDpnKUwC68i1wGlrYAfIgYWL7vUZwk2GkYLQH5CvFig==}
@@ -214,7 +214,6 @@ packages:
       '@vue/compiler-ssr': 3.2.41
       '@vue/shared': 3.2.41
       vue: 3.2.41
-    dev: false
 
   /@vue/shared/3.2.41:
     resolution: {integrity: sha512-W9mfWLHmJhkfAmV+7gDjcHeAWALQtgGT3JErxULl0oz6R6+3ug91I7IErs93eCFhPCZPHBs4QJS7YWEV7A3sxw==}
@@ -336,7 +335,6 @@ packages:
 
   /csstype/2.6.21:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==}
-    dev: false
 
   /csstype/3.0.11:
     resolution: {integrity: sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==}
@@ -1009,7 +1007,6 @@ packages:
       '@vue/runtime-dom': 3.2.41
       '@vue/server-renderer': 3.2.41_vue@3.2.41
       '@vue/shared': 3.2.41
-    dev: false
 
   /vueuc/0.4.49_vue@3.2.41:
     resolution: {integrity: sha512-WarAC44a/Yx78CxkAgROYLq+LkAeCGA/6wHidVoFmHLbzyF3SiP2nzRNGD/8zJeJInXv18EnWK6A//eGgMMq8w==}
@@ -1042,8 +1039,14 @@ packages:
     resolution: {integrity: sha512-CfRA43kNULGjkDcg2KJz2G9fJ2bFEa0MZKP75DG0DKGLEwfdXVU/4bysSNhYPJ9CIE3LQ+ewSBydoElIZj6E8Q==}
     dev: true
 
+  /xiao-you-editor/0.1.0:
+    resolution: {integrity: sha512-TtB09a6tX3U8wiufh7BqREhgliRQnnXeLiR0Zj8/U9Th5mMJF12Up3CnA4YX3tkxxeR/sP+AoWUl93xVrxDTvw==}
+    dependencies:
+      vue: 3.2.41
+      xiao-you-transform-v3: 1.0.5
+    dev: true
+
   /xiao-you-transform-v3/1.0.5:
     resolution: {integrity: sha512-lYDNe8pZQ7iO1TgHxy/+xw57j1ktXuJKMwdQqs8gAMqRCO4/clEWhoxVFdLuzyDY6Wc8DJetn78BlsHlT4VYzQ==}
     dependencies:
       vue: 3.2.41
-    dev: false

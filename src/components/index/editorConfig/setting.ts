@@ -9,7 +9,8 @@ import type {
   FontFamily,
   Theme,
   Templates,
-} from "../../../../lib/index.d"
+} from "xiao-you-editor/lib/index"
+
 export const setting = reactive<{
   styles: Styles
   borderRadius: BorderRadius
