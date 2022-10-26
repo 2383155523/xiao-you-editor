@@ -6,6 +6,8 @@
           <div class="name">Xiao You Editor Playground</div>
           <setting />
           <changeTheme />
+          
+          <img src="@/assets/logo.png" alt="" class="logo" />
         </header>
         <main>
           <router-view></router-view>
@@ -36,6 +38,14 @@ body {
 .root {
   padding-top: 8vh;
   box-sizing: border-box;
+  .logo {
+      width: 30px;
+      height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+  }
   header {
     width: 100%;
     height: 8vh;

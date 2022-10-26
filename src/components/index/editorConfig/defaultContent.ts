@@ -20,7 +20,7 @@ console.log(toSum(1,2))
   ~~~
 <my-p>我是本文段落</my-p>
 
-<my-a color="#409EFFFF" size="16px" weight="bold" href="http://www.fuyouplus.cn/" line>微若蜉蝣</my-a>
+<my-a color="#409EFFFF" size="16px" weight="bold" href="https://fuyouplus.cn/" line>微若蜉蝣</my-a>
 
       <my-tips type="info" title="小蝣说:">
       tpye的可选值有 info | warn | error | success
