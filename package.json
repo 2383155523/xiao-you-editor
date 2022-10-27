@@ -1,6 +1,6 @@
 {
   "name": "xiao-you-editor",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "基于vue3的一个内容编辑器插件",
   "author": {
     "name": "微若蜉蝣",
@@ -35,7 +35,7 @@
     "xiao-you-editor",
     "vue3"
   ],
-  "homepage": "https://fuyouplus.cn",
+  "homepage": "https://fuyouplus.gitee.io/xiao-you-editor-docs/",
   "repository": {
     "type": "gitee",
     "url": "https://gitee.com/fuyouplus/xiao-you-editor"
