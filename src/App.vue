@@ -6,7 +6,7 @@
           <div class="name">Xiao You Editor Playground</div>
           <setting />
           <changeTheme />
-          
+          <goDoc />
           <img src="@/assets/logo.png" alt="" class="logo" />
         </header>
         <main>
@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import changeTheme from "@/components/changeTheme/index.vue"
 import setting from "@/components/setting/index.vue"
+import goDoc from "@/components/goDoc/index.vue"
 import { NConfigProvider, darkTheme, lightTheme, zhCN, NNotificationProvider } from "naive-ui"
 import { setting as ProjectSetting } from "./components/index/editorConfig/setting"
 </script>
@@ -39,8 +40,8 @@ body {
   padding-top: 8vh;
   box-sizing: border-box;
   .logo {
-      width: 30px;
-      height: 30px;
+    width: 30px;
+    height: 30px;
     position: absolute;
     top: 50%;
     left: 30px;
