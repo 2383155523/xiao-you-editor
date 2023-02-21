@@ -68,12 +68,22 @@ async function updateVersion(releaseType) {
   return targetVersion
 }
 
+async function getCommitMessage() {
+  const { msg } = await prompt({
+    type: "input",
+    name: "msg",
+    message: "Input Message For Current Commit",
+  })
+  return msg
+}
+
 async function commitChanges(targetVersion) {
   const { stdout } = await run("git", ["diff"], { stdio: "pipe" })
   if (stdout) {
     step("\nCommitting changes...")
     await run("git", ["add", "-A"])
-    await run("git", ["commit", "-m", `release: v${targetVersion}`])
+    const msg = await getCommitMessage()
+    await run("git", ["commit", "-m", `release: v${targetVersion},${msg}`])
   } else {
     console.log("No changes to commit.")
   }

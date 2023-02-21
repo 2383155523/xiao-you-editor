@@ -1,3 +1,5 @@
+import { renderBox as RenderBox } from "./renderBox"
+import type { App } from "vue"
 interface Font {
   color?: string
   size?: string
@@ -42,3 +44,7 @@ export type Templates = Array<{ template: string; light: { icon: string }; dark:
 export type TransitionMode = string
 export type FontFamily = string
 export type CustomParser = Array<(template: string) => string>
+export type renderBox = typeof RenderBox
+export default interface Plugin {
+  install(app: App): void
+}
