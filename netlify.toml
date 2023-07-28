@@ -1,0 +1,13 @@
+[build]
+  command = "pnpm install --frozen-lockfile --prefer-frozen-lockfile && pnpm run build"
+  publish = "public/"
+
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.branch-deploy]
+  command = "pnpm install --frozen-lockfile --prefer-frozen-lockfile && pnpm run build"
+  publish = "public/"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
