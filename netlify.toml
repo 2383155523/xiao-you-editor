@@ -1,13 +1,9 @@
 [build]
-  command = "pnpm install --frozen-lockfile --prefer-frozen-lockfile && pnpm run build"
-  publish = "public/"
+  command = "pnpm install --no-frozen-lockfile && pnpm run build"
+  publish = "dist/"
 
 [context.production.environment]
-  NODE_ENV = "production"
+  PNPM_VERSION = "8.6.7"
 
-[context.branch-deploy]
-  command = "pnpm install --frozen-lockfile --prefer-frozen-lockfile && pnpm run build"
-  publish = "public/"
-
-[context.deploy-preview.environment]
-  NODE_ENV = "development"
+[[plugins]]
+  package = "@netlify/plugin-corepack"
