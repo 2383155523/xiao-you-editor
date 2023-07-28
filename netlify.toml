@@ -4,6 +4,3 @@
 
 [context.production.environment]
   PNPM_VERSION = "5.4.0"
-
-[[plugins]]
-  package = "@netlify/plugin-corepack"
