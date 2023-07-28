@@ -17,7 +17,7 @@ specifiers:
   vue-router: ^4.0.16
   vue-tsc: ^0.34.7
   xiao-you-bus: ^1.0.3
-  xiao-you-editor: ^0.1.3
+  xiao-you-editor: ^0.1.5
   xiao-you-transform-v3: ^1.0.5
 
 dependencies:
@@ -40,7 +40,7 @@ devDependencies:
   vue-router: 4.1.5_vue@3.2.41
   vue-tsc: 0.34.17_typescript@4.6.4
   xiao-you-bus: 1.0.3
-  xiao-you-editor: 0.1.3
+  xiao-you-editor: 0.1.5
 
 packages:
 
@@ -1061,10 +1061,9 @@ packages:
     resolution: {integrity: sha512-CfRA43kNULGjkDcg2KJz2G9fJ2bFEa0MZKP75DG0DKGLEwfdXVU/4bysSNhYPJ9CIE3LQ+ewSBydoElIZj6E8Q==}
     dev: true
 
-  /xiao-you-editor/0.1.3:
-    resolution: {integrity: sha512-IllG+6QMLT9NClKAGX/KLt3HQyCA5PBPXL1MElMPfItnEfOQiciEvzX+khhP4KCth7XuHIqpGwCGBDJ2P7bdSA==}
+  /xiao-you-editor/0.1.5:
+    resolution: {integrity: sha512-UsW50lV4musBvZ3a3P8JNCokQCaL60j8llZK5bLKIMH4lty4vLhaNVC3FKdEdOdNwRqAuAGDZOckS9nIQBAXxA==}
     dependencies:
-      vue: 3.2.41
       xiao-you-transform-v3: 1.0.5
     dev: true
 

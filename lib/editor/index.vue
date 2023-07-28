@@ -372,7 +372,6 @@ onMounted(() => {
 .editContainer {
   width: 100%;
   height: 100%;
-
   background-image: v-bind("'url('+ style[theme].background.url +')'");
   background-color: v-bind("style[theme].background.color");
   background-size: v-bind("style[theme].background.size");
