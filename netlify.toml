@@ -1,9 +1,9 @@
 [build]
-  command = "npm install && npm run build"
+  command = "pnpm install --no-frozen-lockfile && pnpm run build"
   publish = "dist/"
 
 [context.production.environment]
-  PNPM_VERSION = "8.6.7"
+  PNPM_VERSION = "5.4.0"
 
 [[plugins]]
   package = "@netlify/plugin-corepack"
