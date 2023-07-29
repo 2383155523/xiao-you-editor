@@ -5,7 +5,7 @@ import { setting } from "../index/editorConfig/setting"
 </script>
 
 <template>
-  <a href="https://fuyouplus.gitee.io/xiao-you-editor-docs/" target="_blank">
+  <a href="https://xiao-you-editor-docs.netlify.app" target="_blank">
     <img :src="setting.theme == 'dark' ? documentLight : documentDark" alt="" />
   </a>
 </template>
