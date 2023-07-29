@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm install --no-frozen-lockfile && pnpm run build"
+  command = "pnpm install --no-frozen-lockfile && pnpm run build-only"
   publish = "dist/"
 
 [context.production.environment]
